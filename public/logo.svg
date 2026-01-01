@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#gradient)" />
+
+  <!-- Chart bars representing trading -->
+  <rect x="22" y="55" width="10" height="20" rx="2" fill="white" opacity="0.9"/>
+  <rect x="36" y="40" width="10" height="35" rx="2" fill="white" opacity="0.9"/>
+  <rect x="50" y="30" width="10" height="45" rx="2" fill="white" opacity="0.9"/>
+  <rect x="64" y="45" width="10" height="30" rx="2" fill="white" opacity="0.9"/>
+
+  <!-- Trend line -->
+  <path
+    d="M25 60 L40 45 L55 35 L70 50"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- Arrow up for growth -->
+  <path
+    d="M70 50 L70 42 M70 42 L65 47 M70 42 L75 47"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- K letter stylized -->
+  <text
+    x="50"
+    y="90"
+    font-family="Arial, sans-serif"
+    font-size="14"
+    font-weight="bold"
+    fill="white"
+    text-anchor="middle"
+    opacity="0.8"
+  >
+    TK
+  </text>
+
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4AA" />
+      <stop offset="50%" stop-color="#00B894" />
+      <stop offset="100%" stop-color="#009B77" />
+    </linearGradient>
+  </defs>
+</svg>
