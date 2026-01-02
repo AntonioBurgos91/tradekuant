@@ -647,7 +647,7 @@ export default function DashboardPage() {
 
       <div className="container-wide py-8">
         {/* Global Metrics */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
           <MetricCard
             title={t.dashboard.totalEquity}
             value={`€${global.totalEquity.toFixed(2)}`}
@@ -683,7 +683,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Secondary Metrics */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-5xl mx-auto">
           <MetricCard
             title={t.dashboard.sharpeRatio}
             value={global.sharpeRatio.toFixed(2)}
@@ -719,17 +719,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Platforms */}
-        <div className="mb-8">
-          <div className="mb-6 flex items-center justify-between">
-            <div>
-              <h2 className="text-xl font-semibold">{t.dashboard.byPlatform}</h2>
-              <p className="text-sm text-muted-foreground">
-                {t.dashboard.individualMetrics}
-              </p>
-            </div>
+        <section className="mb-8">
+          <div className="mb-6 text-center">
+            <h2 className="text-xl font-semibold">{t.dashboard.byPlatform}</h2>
+            <p className="text-sm text-muted-foreground">
+              {t.dashboard.individualMetrics}
+            </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
             {isLoading ? (
               Array.from({ length: 3 }).map((_, i) => (
                 <PlatformCard
@@ -776,26 +774,35 @@ export default function DashboardPage() {
               ))
             )}
           </div>
-        </div>
+        </section>
 
-        {/* Charts Row */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          <MonthlyReturnsChart
-            title={t.dashboard.monthlyReturns}
-            subtitle={t.dashboard.performanceByMonth}
-            months={t.months}
-            data={monthlyReturns}
-            isLoading={isLoading}
-          />
+        {/* Charts Section */}
+        <section>
+          <div className="mb-6 text-center">
+            <h2 className="text-xl font-semibold">Rendimiento</h2>
+            <p className="text-sm text-muted-foreground">
+              Datos históricos y evolución
+            </p>
+          </div>
 
-          <EquityCurveChart
-            title={t.dashboard.equityCurve}
-            subtitle={t.dashboard.capitalEvolution}
-            data={equityCurve}
-            platforms={platforms}
-            isLoading={isLoading}
-          />
-        </div>
+          <div className="grid gap-6 lg:grid-cols-2 max-w-5xl mx-auto">
+            <MonthlyReturnsChart
+              title={t.dashboard.monthlyReturns}
+              subtitle={t.dashboard.performanceByMonth}
+              months={t.months}
+              data={monthlyReturns}
+              isLoading={isLoading}
+            />
+
+            <EquityCurveChart
+              title={t.dashboard.equityCurve}
+              subtitle={t.dashboard.capitalEvolution}
+              data={equityCurve}
+              platforms={platforms}
+              isLoading={isLoading}
+            />
+          </div>
+        </section>
       </div>
     </div>
   );
