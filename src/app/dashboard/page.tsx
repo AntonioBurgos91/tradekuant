@@ -324,44 +324,44 @@ function EquityCurveChart({
 
   return (
     <div className="metric-card">
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="text-sm text-muted-foreground">{subtitle}</p>
-        </div>
-        <TrendingUp className="h-5 w-5 text-muted-foreground" />
+      {/* Header - Centrado */}
+      <div className="text-center mb-4">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="text-sm text-muted-foreground">{subtitle}</p>
       </div>
 
-      {/* Filters */}
-      <div className="mb-4 flex flex-wrap items-center gap-2">
+      {/* Filters - Centrados */}
+      <div className="flex flex-col items-center gap-3 mb-4">
         {/* Platform toggles */}
-        {platforms.map((p) => (
-          <button
-            key={p.slug}
-            onClick={() => togglePlatform(p.slug)}
-            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
-              selectedPlatforms.has(p.slug)
-                ? 'bg-opacity-100 text-white'
-                : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
-            }`}
-            style={{
-              backgroundColor: selectedPlatforms.has(p.slug) ? p.color : undefined,
-            }}
-          >
-            <span
-              className={`h-2 w-2 rounded-full ${
-                selectedPlatforms.has(p.slug) ? 'bg-white' : ''
+        <div className="flex flex-wrap justify-center gap-2">
+          {platforms.map((p) => (
+            <button
+              key={p.slug}
+              onClick={() => togglePlatform(p.slug)}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
+                selectedPlatforms.has(p.slug)
+                  ? 'bg-opacity-100 text-white'
+                  : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
               }`}
               style={{
-                backgroundColor: selectedPlatforms.has(p.slug) ? undefined : p.color,
+                backgroundColor: selectedPlatforms.has(p.slug) ? p.color : undefined,
               }}
-            />
-            {p.name}
-          </button>
-        ))}
+            >
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  selectedPlatforms.has(p.slug) ? 'bg-white' : ''
+                }`}
+                style={{
+                  backgroundColor: selectedPlatforms.has(p.slug) ? undefined : p.color,
+                }}
+              />
+              {p.name}
+            </button>
+          ))}
+        </div>
 
         {/* Year selector */}
-        <div className="ml-auto flex items-center gap-1 rounded-lg bg-secondary/30 p-1">
+        <div className="flex items-center gap-1 rounded-lg bg-secondary/30 p-1">
           <button
             onClick={() => setSelectedYear('all')}
             className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
@@ -484,30 +484,26 @@ function MonthlyReturnsChart({
   data: { month: string; value: number }[];
   isLoading?: boolean;
 }) {
-  // Get available years and default to most recent
   const years = [...new Set(data.map(d => d.month.split('-')[0]))].sort((a, b) => parseInt(b) - parseInt(a));
   const [selectedYear, setSelectedYear] = useState<string>(years[0] || '2024');
 
-  // Filter data for selected year
   const yearData = data.filter(d => d.month.startsWith(selectedYear));
   const ytd = yearData.reduce((sum, m) => sum + m.value, 0);
   const maxValue = Math.max(...yearData.map(m => Math.abs(m.value)), 1);
 
   return (
     <div className="metric-card">
-      {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
-        <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="text-sm text-muted-foreground">{subtitle}</p>
-        </div>
-        <div className={`px-3 py-1 rounded-full text-sm font-bold ${ytd >= 0 ? 'bg-profit/20 text-profit' : 'bg-loss/20 text-loss'}`}>
+      {/* Header - Centrado */}
+      <div className="text-center mb-4">
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="text-sm text-muted-foreground">{subtitle}</p>
+        <div className={`inline-block mt-2 px-3 py-1 rounded-full text-sm font-bold ${ytd >= 0 ? 'bg-profit/20 text-profit' : 'bg-loss/20 text-loss'}`}>
           YTD: {ytd >= 0 ? '+' : ''}{ytd.toFixed(1)}%
         </div>
       </div>
 
-      {/* Year Buttons */}
-      <div className="mb-4 flex gap-2">
+      {/* Year Buttons - Centrados */}
+      <div className="flex justify-center gap-2 mb-4">
         {years.map((year) => (
           <button
             key={year}
@@ -527,14 +523,14 @@ function MonthlyReturnsChart({
       {isLoading ? (
         <div className="h-32 animate-pulse rounded bg-secondary/30" />
       ) : (
-        <div className="flex h-32 items-end gap-1">
+        <div className="flex h-32 items-end justify-center gap-1 px-2">
           {yearData.map((month) => {
             const height = maxValue > 0 ? (Math.abs(month.value) / maxValue) * 100 : 0;
             const isPositive = month.value >= 0;
             const monthLabel = months[month.month.split('-')[1]] || month.month.split('-')[1];
 
             return (
-              <div key={month.month} className="flex flex-1 flex-col items-center gap-1">
+              <div key={month.month} className="flex flex-1 max-w-[40px] flex-col items-center gap-1">
                 <span className={`text-[10px] font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
                   {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value.toFixed(0)}%` : ''}
                 </span>
