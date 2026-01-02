@@ -205,12 +205,14 @@ export default function StrategyPage() {
               <p className="mx-auto mb-8 max-w-2xl text-muted-foreground">
                 {t.strategy.performance.description}
               </p>
-              <Link href="/dashboard">
-                <Button size="lg" className="gap-2">
-                  {t.strategy.performance.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
+              <div className="flex justify-center">
+                <Link href="/dashboard">
+                  <Button size="lg" className="gap-2">
+                    {t.strategy.performance.cta}
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
