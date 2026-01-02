@@ -1,14 +1,44 @@
 /**
  * GET /api/dashboard
  * Aggregated dashboard data endpoint
+ * Supports period filtering: ?period=1m|3m|6m|1y|ytd|all
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/db/supabase';
 import type { Platform, Snapshot, MetricsCache, GlobalMetricsCache } from '@/lib/db/types';
 
-export async function GET() {
+type Period = '1m' | '3m' | '6m' | '1y' | 'ytd' | 'all';
+
+function getPeriodStartDate(period: Period): Date {
+  const now = new Date();
+  switch (period) {
+    case '1m':
+      return new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    case '3m':
+      return new Date(now.getFullYear(), now.getMonth() - 3, now.getDate());
+    case '6m':
+      return new Date(now.getFullYear(), now.getMonth() - 6, now.getDate());
+    case '1y':
+      return new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+    case 'ytd':
+      return new Date(now.getFullYear(), 0, 1);
+    case 'all':
+    default:
+      return new Date(now.getFullYear() - 2, now.getMonth(), now.getDate()); // 2 years back
+  }
+}
+
+export async function GET(request: NextRequest) {
   try {
+    // Get period from query params
+    const searchParams = request.nextUrl.searchParams;
+    const period = (searchParams.get('period') || 'all') as Period;
+    const validPeriods: Period[] = ['1m', '3m', '6m', '1y', 'ytd', 'all'];
+    const selectedPeriod = validPeriods.includes(period) ? period : 'all';
+
+    const periodStartDate = getPeriodStartDate(selectedPeriod);
+
     // Get platforms
     const { data: platforms, error: platformsError } = await supabase
       .from('platforms')
@@ -33,44 +63,74 @@ export async function GET() {
       })
     );
 
-    // Get metrics cache for each platform (period: all)
+    // Get metrics cache for each platform (use selected period)
     const { data: metricsCache, error: metricsError } = await supabase
       .from('metrics_cache')
       .select('*')
-      .eq('period', 'all');
+      .eq('period', selectedPeriod);
 
     if (metricsError) throw metricsError;
 
-    const metricsList = (metricsCache || []) as MetricsCache[];
+    // Fallback to 'all' if no metrics for selected period
+    let metricsList = (metricsCache || []) as MetricsCache[];
+    if (metricsList.length === 0 && selectedPeriod !== 'all') {
+      const { data: allMetrics } = await supabase
+        .from('metrics_cache')
+        .select('*')
+        .eq('period', 'all');
+      metricsList = (allMetrics || []) as MetricsCache[];
+    }
 
     // Get global metrics
     const { data: globalMetrics, error: globalError } = await supabase
       .from('global_metrics_cache')
       .select('*')
-      .eq('period', 'all')
+      .eq('period', selectedPeriod)
       .single();
+
+    // Fallback to 'all' if no global metrics for selected period
+    let globalData = globalMetrics as GlobalMetricsCache | null;
+    if (!globalData && selectedPeriod !== 'all') {
+      const { data: allGlobal } = await supabase
+        .from('global_metrics_cache')
+        .select('*')
+        .eq('period', 'all')
+        .single();
+      globalData = allGlobal as GlobalMetricsCache | null;
+    }
 
     if (globalError && globalError.code !== 'PGRST116') throw globalError;
 
-    const globalData = globalMetrics as GlobalMetricsCache | null;
-
-    // Get snapshots for charts (last 12 months)
-    const twelveMonthsAgo = new Date();
-    twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
-
+    // Get snapshots for charts (filtered by period)
     const { data: chartSnapshots, error: chartError } = await supabase
       .from('snapshots')
-      .select('date, equity, total_pnl_percent, platform_id')
-      .gte('date', twelveMonthsAgo.toISOString().split('T')[0])
+      .select('date, equity, total_pnl_percent, platform_id, drawdown')
+      .gte('date', periodStartDate.toISOString().split('T')[0])
       .order('date', { ascending: true });
 
     if (chartError) throw chartError;
 
-    // Calculate monthly returns
-    const monthlyReturns = calculateMonthlyReturns(chartSnapshots || []);
+    // Get last 30 days snapshots for sparklines
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-    // Build equity curve data (sample every 7 days for performance)
+    const { data: sparklineSnapshots } = await supabase
+      .from('snapshots')
+      .select('date, equity, platform_id')
+      .gte('date', thirtyDaysAgo.toISOString().split('T')[0])
+      .order('date', { ascending: true });
+
+    // Calculate monthly returns for the period
+    const monthlyReturns = calculateMonthlyReturns(chartSnapshots || [], selectedPeriod);
+
+    // Build equity curve data
     const equityCurve = buildEquityCurve(chartSnapshots || [], platformList);
+
+    // Build drawdown curve
+    const drawdownCurve = buildDrawdownCurve(chartSnapshots || [], platformList);
+
+    // Build sparkline data
+    const sparklineData = buildSparklineData(sparklineSnapshots || [], platformList);
 
     // Build platform data with metrics
     const platformsData = latestSnapshots.map(({ platform, snapshot }) => {
@@ -88,6 +148,8 @@ export async function GET() {
         aum: snapshot?.aum || metrics?.total_aum || 0,
         drawdown: metrics?.max_drawdown || snapshot?.drawdown || 0,
         sharpe: metrics?.sharpe_ratio || 0,
+        sortino: metrics?.sortino_ratio || 0,
+        winRate: metrics?.win_rate || 0,
         lastUpdate: snapshot?.updated_at || snapshot?.created_at || new Date().toISOString(),
       };
     });
@@ -107,14 +169,18 @@ export async function GET() {
     const avgWinRate = metricsList.length
       ? metricsList.reduce((sum, m) => sum + (m.win_rate || 0), 0) / metricsList.length
       : 0;
+    const maxDrawdown = metricsList.length
+      ? Math.max(...metricsList.map(m => Math.abs(m.max_drawdown || 0)))
+      : 0;
 
     return NextResponse.json({
       success: true,
       data: {
+        period: selectedPeriod,
         global: {
           totalEquity,
           totalReturn: globalData?.total_return || 0,
-          maxDrawdown: globalData?.combined_max_drawdown || 0,
+          maxDrawdown: globalData?.combined_max_drawdown || maxDrawdown,
           totalCopiers,
           totalAUM,
           sharpeRatio: avgSharpe,
@@ -125,6 +191,8 @@ export async function GET() {
         platforms: platformsData,
         monthlyReturns,
         equityCurve,
+        drawdownCurve,
+        sparklineData,
       },
     });
   } catch (error) {
@@ -140,7 +208,7 @@ export async function GET() {
   }
 }
 
-function calculateMonthlyReturns(snapshots: any[]) {
+function calculateMonthlyReturns(snapshots: any[], period: Period) {
   // Group by month (aggregate all platforms)
   const monthlyData: Record<string, { start: number; end: number }> = {};
 
@@ -163,15 +231,14 @@ function calculateMonthlyReturns(snapshots: any[]) {
     }
   });
 
-  // Calculate returns for last 12 months
-  const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  // Determine how many months to show based on period
+  const monthsToShow = period === '1m' ? 1 : period === '3m' ? 3 : period === '6m' ? 6 : 12;
   const now = new Date();
   const results: { month: string; value: number }[] = [];
 
-  for (let i = 11; i >= 0; i--) {
+  for (let i = monthsToShow - 1; i >= 0; i--) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
     const monthKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-    const monthName = months[d.getMonth()];
     const data = monthlyData[monthKey];
 
     let value = 0;
@@ -179,7 +246,10 @@ function calculateMonthlyReturns(snapshots: any[]) {
       value = ((data.end - data.start) / data.start) * 100;
     }
 
-    results.push({ month: monthName, value: parseFloat(value.toFixed(1)) });
+    results.push({
+      month: monthKey,
+      value: parseFloat(value.toFixed(2))
+    });
   }
 
   return results;
@@ -196,9 +266,10 @@ function buildEquityCurve(snapshots: any[], platforms: Platform[]) {
     dateMap[s.date][s.platform_id] = s.equity;
   });
 
-  // Get sorted dates (sample every 3 days for performance)
+  // Get sorted dates (sample based on data volume)
   const sortedDates = Object.keys(dateMap).sort();
-  const sampledDates = sortedDates.filter((_, i) => i % 3 === 0 || i === sortedDates.length - 1);
+  const sampleRate = sortedDates.length > 180 ? 3 : sortedDates.length > 90 ? 2 : 1;
+  const sampledDates = sortedDates.filter((_, i) => i % sampleRate === 0 || i === sortedDates.length - 1);
 
   // Build curve data
   return sampledDates.map((date) => {
@@ -214,6 +285,73 @@ function buildEquityCurve(snapshots: any[], platforms: Platform[]) {
     point.total = total;
     return point;
   });
+}
+
+function buildDrawdownCurve(snapshots: any[], platforms: Platform[]) {
+  // Group snapshots by date and calculate total equity
+  const dateMap: Record<string, number> = {};
+
+  snapshots.forEach((s) => {
+    if (!dateMap[s.date]) {
+      dateMap[s.date] = 0;
+    }
+    dateMap[s.date] += s.equity;
+  });
+
+  // Get sorted dates
+  const sortedDates = Object.keys(dateMap).sort();
+
+  // Calculate running max and drawdown
+  let runningMax = 0;
+  const drawdownData: { date: string; drawdown: number }[] = [];
+
+  sortedDates.forEach((date) => {
+    const equity = dateMap[date];
+    if (equity > runningMax) {
+      runningMax = equity;
+    }
+
+    const drawdown = runningMax > 0 ? ((equity - runningMax) / runningMax) * 100 : 0;
+    drawdownData.push({
+      date,
+      drawdown: parseFloat(drawdown.toFixed(2)),
+    });
+  });
+
+  // Sample if too many points
+  const sampleRate = drawdownData.length > 180 ? 3 : drawdownData.length > 90 ? 2 : 1;
+  return drawdownData.filter((_, i) => i % sampleRate === 0 || i === drawdownData.length - 1);
+}
+
+function buildSparklineData(snapshots: any[], platforms: Platform[]) {
+  const sparklines: Record<string, number[]> = {};
+
+  // Initialize arrays for each platform
+  platforms.forEach((p) => {
+    sparklines[p.slug] = [];
+  });
+
+  // Group by date
+  const dateMap: Record<string, Record<number, number>> = {};
+  snapshots.forEach((s) => {
+    if (!dateMap[s.date]) {
+      dateMap[s.date] = {};
+    }
+    dateMap[s.date][s.platform_id] = s.equity;
+  });
+
+  // Build sparkline arrays (last 30 values per platform)
+  const sortedDates = Object.keys(dateMap).sort();
+  const last30Dates = sortedDates.slice(-30);
+
+  last30Dates.forEach((date) => {
+    platforms.forEach((p) => {
+      const equity = dateMap[date][p.id] || 0;
+      sparklines[p.slug].push(equity);
+    });
+  });
+
+  return sparklines;
 }
 
 export const dynamic = 'force-dynamic';
