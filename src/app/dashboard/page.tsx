@@ -484,16 +484,72 @@ function MonthlyReturnsChart({
   data: { month: string; value: number }[];
   isLoading?: boolean;
 }) {
-  const maxValue = Math.max(...data.map(m => Math.abs(m.value)), 1);
+  const [selectedYear, setSelectedYear] = useState<string>('all');
+
+  // Group data by year
+  const groupedByYear = data.reduce((acc, item) => {
+    const year = item.month.split('-')[0];
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(item);
+    return acc;
+  }, {} as Record<string, typeof data>);
+
+  const availableYears = Object.keys(groupedByYear).sort((a, b) => parseInt(b) - parseInt(a));
+
+  // Filter data based on selected year
+  const filteredData = selectedYear === 'all' ? data : (groupedByYear[selectedYear] || []);
+  const maxValue = Math.max(...filteredData.map(m => Math.abs(m.value)), 1);
+
+  // Calculate YTD for each year
+  const calculateYTD = (yearData: typeof data) => {
+    return yearData.reduce((sum, m) => sum + m.value, 0);
+  };
+
+  const getColorClass = (value: number) => {
+    if (value > 5) return 'bg-green-500/80 text-white';
+    if (value > 2) return 'bg-green-500/50 text-white';
+    if (value > 0) return 'bg-green-500/20 text-foreground';
+    if (value === 0) return 'bg-muted text-muted-foreground';
+    if (value > -2) return 'bg-red-500/20 text-foreground';
+    if (value > -5) return 'bg-red-500/50 text-white';
+    return 'bg-red-500/80 text-white';
+  };
 
   return (
     <div className="metric-card">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
+      {/* Header with filters */}
+      <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-center sm:text-left">
           <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="text-sm text-muted-foreground">{subtitle} (2024)</p>
+          <p className="text-sm text-muted-foreground">{subtitle}</p>
         </div>
-        <Calendar className="h-5 w-5 text-muted-foreground" />
+
+        {/* Year Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-1.5">
+          <button
+            onClick={() => setSelectedYear('all')}
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
+              selectedYear === 'all'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+            }`}
+          >
+            All
+          </button>
+          {availableYears.map((year) => (
+            <button
+              key={year}
+              onClick={() => setSelectedYear(year)}
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
+                selectedYear === year
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+              }`}
+            >
+              {year}
+            </button>
+          ))}
+        </div>
       </div>
 
       {isLoading ? (
@@ -506,16 +562,113 @@ function MonthlyReturnsChart({
             </div>
           ))}
         </div>
+      ) : selectedYear === 'all' ? (
+        /* All Years - Table/Grid View */
+        <div className="space-y-4">
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border/50">
+                  <th className="p-2 text-left font-medium">Año</th>
+                  {Object.values(months).map((month) => (
+                    <th key={month} className="p-2 text-center font-medium min-w-[50px]">
+                      {month}
+                    </th>
+                  ))}
+                  <th className="p-2 text-center font-medium">YTD</th>
+                </tr>
+              </thead>
+              <tbody>
+                {availableYears.map((year) => {
+                  const yearData = groupedByYear[year] || [];
+                  const ytd = calculateYTD(yearData);
+
+                  return (
+                    <tr key={year} className="border-b border-border/30 last:border-b-0">
+                      <td className="p-2 font-semibold">{year}</td>
+                      {Object.keys(months).map((monthKey) => {
+                        const monthData = yearData.find(m => m.month === `${year}-${monthKey}`);
+                        const value = monthData?.value;
+                        return (
+                          <td
+                            key={monthKey}
+                            className={`p-2 text-center text-xs transition-colors ${
+                              value !== undefined ? getColorClass(value) : ''
+                            }`}
+                          >
+                            {value !== undefined
+                              ? `${value > 0 ? '+' : ''}${value.toFixed(1)}%`
+                              : '-'}
+                          </td>
+                        );
+                      })}
+                      <td
+                        className={`p-2 text-center font-semibold ${getColorClass(ytd)}`}
+                      >
+                        {ytd > 0 ? '+' : ''}{ytd.toFixed(1)}%
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-3">
+            {availableYears.map((year) => {
+              const yearData = groupedByYear[year] || [];
+              const ytd = calculateYTD(yearData);
+
+              return (
+                <div key={year} className="rounded-lg border border-border/50 bg-card/30 p-3">
+                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/30">
+                    <span className="font-bold">{year}</span>
+                    <div className={`px-2.5 py-1 rounded-full text-xs font-semibold ${getColorClass(ytd)}`}>
+                      YTD: {ytd > 0 ? '+' : ''}{ytd.toFixed(1)}%
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 gap-1.5">
+                    {Object.entries(months).map(([monthKey, monthLabel]) => {
+                      const monthData = yearData.find(m => m.month === `${year}-${monthKey}`);
+                      const value = monthData?.value;
+                      return (
+                        <div
+                          key={monthKey}
+                          className={`flex flex-col items-center justify-center p-1.5 rounded text-center ${
+                            value !== undefined ? getColorClass(value) : 'bg-muted/30'
+                          }`}
+                        >
+                          <span className="text-[9px] uppercase tracking-wide opacity-70">
+                            {monthLabel}
+                          </span>
+                          <span className="text-[10px] font-semibold">
+                            {value !== undefined
+                              ? `${value > 0 ? '+' : ''}${value.toFixed(1)}%`
+                              : '-'}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       ) : (
-        <div className="flex h-40 items-end justify-between gap-2">
-          {data.map((month) => {
+        /* Single Year - Bar Chart View */
+        <div className="flex h-40 items-end justify-between gap-1 sm:gap-2">
+          {filteredData.map((month) => {
             const height = maxValue > 0 ? (Math.abs(month.value) / maxValue) * 100 : 0;
             const isPositive = month.value >= 0;
-            const monthLabel = months[month.month] || month.month;
+            const monthKey = month.month.split('-')[1];
+            const monthLabel = months[monthKey] || monthKey;
 
             return (
-              <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
-                <span className={`text-xs font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
+              <div key={month.month} className="flex flex-1 flex-col items-center gap-1 sm:gap-2">
+                <span className={`text-[10px] sm:text-xs font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
                   {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value}%` : '-'}
                 </span>
                 <div
@@ -524,12 +677,40 @@ function MonthlyReturnsChart({
                   }`}
                   style={{ height: `${Math.max(height, 4)}%`, minHeight: '4px' }}
                 />
-                <span className="text-xs text-muted-foreground">{monthLabel}</span>
+                <span className="text-[10px] sm:text-xs text-muted-foreground">{monthLabel}</span>
               </div>
             );
           })}
         </div>
       )}
+
+      {/* Legend */}
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-[10px] text-muted-foreground">
+        <div className="flex items-center gap-1">
+          <div className="h-2.5 w-2.5 rounded bg-green-500/80" />
+          <span>&gt;5%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="h-2.5 w-2.5 rounded bg-green-500/50" />
+          <span>2-5%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="h-2.5 w-2.5 rounded bg-green-500/20" />
+          <span>0-2%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="h-2.5 w-2.5 rounded bg-red-500/20" />
+          <span>0 a -2%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="h-2.5 w-2.5 rounded bg-red-500/50" />
+          <span>-2 a -5%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="h-2.5 w-2.5 rounded bg-red-500/80" />
+          <span>&lt;-5%</span>
+        </div>
+      </div>
     </div>
   );
 }
