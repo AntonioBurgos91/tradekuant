@@ -8,6 +8,53 @@ import { LanguageProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 import { APP_NAME, APP_URL } from "@/lib/constants";
 
+// Schema.org JSON-LD structured data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${APP_URL}/#organization`,
+      name: APP_NAME,
+      url: APP_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${APP_URL}/favicon.svg`,
+      },
+      description: "Professional trading metrics dashboard. Verifiable data from multiple platforms, automatically updated.",
+      sameAs: [
+        "https://www.bitget.com/copytrading",
+        "https://www.darwinex.com",
+        "https://www.etoro.com"
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${APP_URL}/#website`,
+      url: APP_URL,
+      name: APP_NAME,
+      publisher: {
+        "@id": `${APP_URL}/#organization`,
+      },
+      inLanguage: ["es", "en", "de", "fr", "zh", "ar"],
+    },
+    {
+      "@type": "FinancialService",
+      "@id": `${APP_URL}/#service`,
+      name: `${APP_NAME} Copy Trading`,
+      provider: {
+        "@id": `${APP_URL}/#organization`,
+      },
+      description: "Automated copy trading service across multiple platforms including Bitget, Darwinex, and eToro. Transparent and verifiable trading metrics.",
+      serviceType: "Copy Trading",
+      areaServed: {
+        "@type": "Place",
+        name: "Worldwide",
+      },
+    },
+  ],
+};
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -98,6 +145,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} font-sans`}>
         <ThemeProvider>
           <LanguageProvider>

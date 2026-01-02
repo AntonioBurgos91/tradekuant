@@ -1,26 +1,35 @@
+'use client';
+
 import Link from 'next/link';
 import { TrendingUp, ExternalLink } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n';
+import { NewsletterForm } from '@/components/common/NewsletterForm';
 
-const footerLinks = {
-  plataformas: [
-    { name: 'Bitget', href: 'https://www.bitget.com', external: true },
-    { name: 'Darwinex', href: 'https://www.darwinex.com', external: true },
-    { name: 'eToro', href: 'https://www.etoro.com', external: true },
-  ],
-  recursos: [
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Estrategia', href: '/strategy' },
-    { name: 'Métricas', href: '/dashboard#metrics' },
-  ],
-  legal: [
-    { name: 'Términos de Uso', href: '/terms' },
-    { name: 'Privacidad', href: '/privacy' },
-    { name: 'Disclaimer', href: '/disclaimer' },
-  ],
-};
+// Links to copy trading profiles (replace PLACEHOLDER with real IDs)
+const platformCopyLinks = [
+  { name: 'Bitget Copy Trading', href: 'https://www.bitget.com/copytrading/trader/PLACEHOLDER', color: '#00C896' },
+  { name: 'Darwinex DARWIN', href: 'https://www.darwinex.com/darwin/PLACEHOLDER', color: '#3B82F6' },
+  { name: 'eToro Portfolio', href: 'https://www.etoro.com/people/PLACEHOLDER', color: '#69C53E' },
+];
 
 export function Footer() {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    plataformas: platformCopyLinks,
+    recursos: [
+      { name: t.nav.dashboard, href: '/dashboard' },
+      { name: t.howToCopy.navLabel, href: '/como-copiar' },
+      { name: t.nav.strategy, href: '/strategy' },
+      { name: t.contact.title, href: '/contacto' },
+    ],
+    legal: [
+      { name: t.footer.legalNotice, href: '/terms' },
+      { name: t.footer.privacy, href: '/privacy' },
+      { name: t.footer.risk, href: '/disclaimer' },
+    ],
+  };
 
   return (
     <footer className="relative border-t border-border/50 bg-card/30">
@@ -29,7 +38,7 @@ export function Footer() {
 
       <div className="container-wide relative z-10">
         {/* Main footer */}
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-6">
           {/* Brand column */}
           <div className="lg:col-span-2">
             <Link href="/" className="mb-6 flex items-center gap-3">
@@ -44,15 +53,17 @@ export function Footer() {
             </Link>
 
             <p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Dashboard profesional de métricas de trading. Datos verificables de
-              múltiples plataformas, actualizados automáticamente.
+              {t.footer.description}
             </p>
+
+            {/* Newsletter */}
+            <NewsletterForm variant="compact" className="max-w-sm" />
           </div>
 
-          {/* Links columns */}
+          {/* Copy Trading Links */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Plataformas
+              Copy Trading
             </h4>
             <ul className="space-y-3">
               {footerLinks.plataformas.map((link) => (
@@ -61,8 +72,12 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1 text-sm text-foreground/70 transition-colors hover:text-primary"
+                    className="group inline-flex items-center gap-2 text-sm text-foreground/70 transition-colors hover:text-primary"
                   >
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{ backgroundColor: link.color }}
+                    />
                     {link.name}
                     <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
                   </a>
@@ -71,9 +86,10 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Resources */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Recursos
+              {t.footer.resources}
             </h4>
             <ul className="space-y-3">
               {footerLinks.recursos.map((link) => (
@@ -89,9 +105,10 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Legal */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Legal
+              {t.footer.legal}
             </h4>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
@@ -106,12 +123,28 @@ export function Footer() {
               ))}
             </ul>
           </div>
+
+          {/* Contact column */}
+          <div>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+              {t.contact.title}
+            </h4>
+            <p className="text-sm text-muted-foreground mb-3">
+              {t.contact.subtitle}
+            </p>
+            <a
+              href="mailto:contact@tradekuant.com"
+              className="text-sm text-primary hover:underline"
+            >
+              contact@tradekuant.com
+            </a>
+          </div>
         </div>
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border/50 py-6 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            &copy; {currentYear} TradeKuant. La K de Kuantificable.
+            &copy; {currentYear} TradeKuant. {t.footer.copyright}.
           </p>
 
           <div className="flex items-center gap-4">
@@ -120,7 +153,7 @@ export function Footer() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              Datos actualizados diariamente
+              {t.footer.updatedDaily}
             </span>
           </div>
         </div>
@@ -128,10 +161,7 @@ export function Footer() {
         {/* Risk disclaimer */}
         <div className="border-t border-border/50 py-4">
           <p className="text-center text-[10px] leading-relaxed text-muted-foreground/60">
-            <strong>Aviso de riesgo:</strong> El trading con apalancamiento conlleva un alto
-            nivel de riesgo y puede no ser adecuado para todos los inversores. Los resultados
-            pasados no garantizan rendimientos futuros. Invierte solo capital que puedas
-            permitirte perder.
+            <strong>{t.howToCopy.disclaimer.title}:</strong> {t.footer.riskWarning}
           </p>
         </div>
       </div>

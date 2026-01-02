@@ -25,8 +25,8 @@ export function Header() {
   const navLinks = [
     { href: '/', label: t.nav.home },
     { href: '/dashboard', label: t.nav.dashboard },
+    { href: '/como-copiar', label: t.howToCopy.navLabel },
     { href: '/strategy', label: t.nav.strategy },
-    { href: '/#features', label: t.nav.features },
   ];
 
   useEffect(() => {

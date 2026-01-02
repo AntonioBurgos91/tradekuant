@@ -126,10 +126,10 @@ const es = {
   strategy: {
     title: 'Estrategia de Trading',
     subtitle: 'Filosofía de inversión y metodología',
-    intro: 'Mi enfoque de trading se basa en la gestión sistemática del riesgo y la diversificación a través de múltiples plataformas y activos.',
+    intro: 'El enfoque de TradeKuant se basa en la gestión sistemática del riesgo y la diversificación a través de múltiples plataformas y activos.',
     philosophy: {
       title: 'Filosofía de Inversión',
-      description: 'Creo en un enfoque disciplinado y cuantificable del trading. Cada decisión está respaldada por datos y análisis técnico riguroso.',
+      description: 'TradeKuant aplica un enfoque disciplinado y cuantificable del trading. Cada decisión está respaldada por datos y análisis técnico riguroso.',
       points: [
         'Gestión de riesgo como prioridad número uno',
         'Diversificación entre plataformas y activos',
@@ -138,15 +138,15 @@ const es = {
       ],
     },
     approach: {
-      title: 'Mi Enfoque',
-      description: 'Opero en múltiples plataformas para diversificar el riesgo y aprovechar diferentes oportunidades de mercado.',
-      bitget: 'En Bitget me centro en copy trading de criptomonedas, aprovechando la volatilidad del mercado cripto con una gestión de riesgo estricta.',
-      darwinex: 'En Darwinex gestiono un DARWIN enfocado en forex y CFDs, con un enfoque de swing trading y análisis técnico.',
-      etoro: 'En eToro como Popular Investor, ofrezco una cartera diversificada para inversores que buscan exposición a múltiples mercados.',
+      title: 'Enfoque de TradeKuant',
+      description: 'TradeKuant opera en múltiples plataformas para diversificar el riesgo y aprovechar diferentes oportunidades de mercado.',
+      bitget: 'En Bitget, TradeKuant se centra en copy trading de criptomonedas, aprovechando la volatilidad del mercado cripto con una gestión de riesgo estricta.',
+      darwinex: 'En Darwinex, TradeKuant gestiona un DARWIN enfocado en forex y CFDs, con un enfoque de swing trading y análisis técnico.',
+      etoro: 'En eToro como Popular Investor, TradeKuant ofrece una cartera diversificada para inversores que buscan exposición a múltiples mercados.',
     },
     risk: {
       title: 'Gestión de Riesgo',
-      description: 'El control del riesgo es fundamental en mi estrategia. Utilizo:',
+      description: 'El control del riesgo es fundamental en la estrategia de TradeKuant:',
       points: [
         'Stop loss en todas las operaciones',
         'Límite máximo de exposición por operación',
@@ -156,7 +156,7 @@ const es = {
     },
     performance: {
       title: 'Rendimiento',
-      description: 'Todos mis resultados son verificables y se actualizan diariamente de forma automática desde las APIs de cada plataforma.',
+      description: 'Todos los resultados de TradeKuant son verificables y se actualizan diariamente de forma automática desde las APIs de cada plataforma.',
       cta: 'Ver métricas completas en el Dashboard',
     },
   },
@@ -179,6 +179,50 @@ const es = {
   },
   common: {
     vsLastMonth: 'vs mes anterior',
+  },
+  howToCopy: {
+    navLabel: 'Cómo Copiar',
+    hero: {
+      title: 'Empieza a Copiar en 3 Pasos',
+      subtitle: 'Selecciona tu plataforma preferida y sigue las instrucciones para empezar a copiar las operaciones de TradeKuant.',
+    },
+    minCapital: 'Capital mínimo recomendado',
+    copyOn: 'Copiar en',
+    faq: {
+      title: 'Preguntas Frecuentes',
+      subtitle: 'Resolvemos las dudas más comunes sobre copy trading',
+      items: [
+        { question: '¿Qué es el copy trading?', answer: 'El copy trading permite replicar automáticamente las operaciones de un trader experimentado en tu propia cuenta. Cuando TradeKuant abre o cierra una posición, la misma operación se ejecuta proporcionalmente en tu cuenta.' },
+        { question: '¿Cuánto capital necesito para empezar?', answer: 'El capital mínimo varía según la plataforma: Bitget ($100), Darwinex (€500) y eToro ($200). TradeKuant recomienda empezar con el mínimo sugerido para cada plataforma.' },
+        { question: '¿Puedo dejar de copiar en cualquier momento?', answer: 'Sí, puedes pausar o detener el copy trading en cualquier momento desde la plataforma. Tienes control total sobre tu capital.' },
+        { question: '¿Los resultados pasados garantizan resultados futuros?', answer: 'No. El trading conlleva riesgos y los resultados pasados no garantizan rendimientos futuros. Invierte solo capital que puedas permitirte perder.' },
+      ],
+    },
+    disclaimer: {
+      title: 'Aviso de Riesgo',
+      text: 'El trading con apalancamiento conlleva un alto nivel de riesgo y puede no ser adecuado para todos los inversores. Los resultados pasados no garantizan rendimientos futuros. Invierte solo capital que puedas permitirte perder. TradeKuant no proporciona asesoramiento financiero personalizado.',
+    },
+  },
+  blog: {
+    title: 'Blog',
+    subtitle: 'Análisis de mercado y actualizaciones de TradeKuant',
+    readMore: 'Leer más',
+    backToBlog: 'Volver al Blog',
+    publishedBy: 'Equipo TradeKuant',
+    recentPosts: 'Artículos Recientes',
+  },
+  newsletter: {
+    title: 'Mantente Informado',
+    description: 'Recibe análisis de mercado y actualizaciones de rendimiento',
+    placeholder: 'Tu email',
+    subscribe: 'Suscribirse',
+    success: '¡Gracias! Te mantendremos informado.',
+  },
+  contact: {
+    title: 'Contacto',
+    subtitle: 'Para consultas sobre copy trading o colaboraciones',
+    email: 'Email de contacto',
+    disclaimer: 'TradeKuant no proporciona asesoramiento financiero personalizado.',
   },
 };
 
@@ -272,10 +316,10 @@ const en: typeof es = {
   strategy: {
     title: 'Trading Strategy',
     subtitle: 'Investment philosophy and methodology',
-    intro: 'My trading approach is based on systematic risk management and diversification across multiple platforms and assets.',
+    intro: 'TradeKuant\'s approach is based on systematic risk management and diversification across multiple platforms and assets.',
     philosophy: {
       title: 'Investment Philosophy',
-      description: 'I believe in a disciplined and quantifiable approach to trading. Every decision is backed by data and rigorous technical analysis.',
+      description: 'TradeKuant applies a disciplined and quantifiable approach to trading. Every decision is backed by data and rigorous technical analysis.',
       points: [
         'Risk management as the number one priority',
         'Diversification across platforms and assets',
@@ -284,15 +328,15 @@ const en: typeof es = {
       ],
     },
     approach: {
-      title: 'My Approach',
-      description: 'I operate on multiple platforms to diversify risk and take advantage of different market opportunities.',
-      bitget: 'On Bitget I focus on cryptocurrency copy trading, leveraging crypto market volatility with strict risk management.',
-      darwinex: 'On Darwinex I manage a DARWIN focused on forex and CFDs, with a swing trading approach and technical analysis.',
-      etoro: 'On eToro as a Popular Investor, I offer a diversified portfolio for investors seeking exposure to multiple markets.',
+      title: 'TradeKuant\'s Approach',
+      description: 'TradeKuant operates on multiple platforms to diversify risk and take advantage of different market opportunities.',
+      bitget: 'On Bitget, TradeKuant focuses on cryptocurrency copy trading, leveraging crypto market volatility with strict risk management.',
+      darwinex: 'On Darwinex, TradeKuant manages a DARWIN focused on forex and CFDs, with a swing trading approach and technical analysis.',
+      etoro: 'On eToro as a Popular Investor, TradeKuant offers a diversified portfolio for investors seeking exposure to multiple markets.',
     },
     risk: {
       title: 'Risk Management',
-      description: 'Risk control is fundamental in my strategy. I use:',
+      description: 'Risk control is fundamental in TradeKuant\'s strategy:',
       points: [
         'Stop loss on all trades',
         'Maximum exposure limit per trade',
@@ -302,7 +346,7 @@ const en: typeof es = {
     },
     performance: {
       title: 'Performance',
-      description: 'All my results are verifiable and updated daily automatically from each platform\'s APIs.',
+      description: 'All TradeKuant\'s results are verifiable and updated daily automatically from each platform\'s APIs.',
       cta: 'View complete metrics on the Dashboard',
     },
   },
@@ -321,6 +365,50 @@ const en: typeof es = {
   },
   months: { jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec' },
   common: { vsLastMonth: 'vs last month' },
+  howToCopy: {
+    navLabel: 'How to Copy',
+    hero: {
+      title: 'Start Copying in 3 Steps',
+      subtitle: 'Select your preferred platform and follow the instructions to start copying TradeKuant trades.',
+    },
+    minCapital: 'Recommended minimum capital',
+    copyOn: 'Copy on',
+    faq: {
+      title: 'Frequently Asked Questions',
+      subtitle: 'Answers to common questions about copy trading',
+      items: [
+        { question: 'What is copy trading?', answer: 'Copy trading allows you to automatically replicate the trades of an experienced trader in your own account. When TradeKuant opens or closes a position, the same trade executes proportionally in your account.' },
+        { question: 'How much capital do I need to start?', answer: 'Minimum capital varies by platform: Bitget ($100), Darwinex (€500) and eToro ($200). TradeKuant recommends starting with the suggested minimum for each platform.' },
+        { question: 'Can I stop copying at any time?', answer: 'Yes, you can pause or stop copy trading at any time from the platform. You have full control over your capital.' },
+        { question: 'Do past results guarantee future results?', answer: 'No. Trading involves risks and past results do not guarantee future returns. Only invest capital you can afford to lose.' },
+      ],
+    },
+    disclaimer: {
+      title: 'Risk Warning',
+      text: 'Leveraged trading carries a high level of risk and may not be suitable for all investors. Past results do not guarantee future returns. Only invest capital you can afford to lose. TradeKuant does not provide personalized financial advice.',
+    },
+  },
+  blog: {
+    title: 'Blog',
+    subtitle: 'Market analysis and TradeKuant updates',
+    readMore: 'Read more',
+    backToBlog: 'Back to Blog',
+    publishedBy: 'TradeKuant Team',
+    recentPosts: 'Recent Posts',
+  },
+  newsletter: {
+    title: 'Stay Informed',
+    description: 'Receive market analysis and performance updates',
+    placeholder: 'Your email',
+    subscribe: 'Subscribe',
+    success: 'Thank you! We will keep you informed.',
+  },
+  contact: {
+    title: 'Contact',
+    subtitle: 'For inquiries about copy trading or collaborations',
+    email: 'Contact email',
+    disclaimer: 'TradeKuant does not provide personalized financial advice.',
+  },
 };
 
 // German
@@ -369,27 +457,27 @@ const de: typeof es = {
   strategy: {
     title: 'Handelsstrategie',
     subtitle: 'Anlagephilosophie und Methodik',
-    intro: 'Mein Handelsansatz basiert auf systematischem Risikomanagement und Diversifikation über mehrere Plattformen und Vermögenswerte.',
+    intro: 'Der Ansatz von TradeKuant basiert auf systematischem Risikomanagement und Diversifikation über mehrere Plattformen und Vermögenswerte.',
     philosophy: {
       title: 'Anlagephilosophie',
-      description: 'Ich glaube an einen disziplinierten und quantifizierbaren Handelsansatz. Jede Entscheidung wird durch Daten und rigorose technische Analyse gestützt.',
+      description: 'TradeKuant wendet einen disziplinierten und quantifizierbaren Handelsansatz an. Jede Entscheidung wird durch Daten und rigorose technische Analyse gestützt.',
       points: ['Risikomanagement als oberste Priorität', 'Diversifikation über Plattformen und Assets', 'Vollständige Transparenz der Ergebnisse', 'Kontinuierliche Verbesserung basierend auf Metriken'],
     },
     approach: {
-      title: 'Mein Ansatz',
-      description: 'Ich handle auf mehreren Plattformen, um das Risiko zu diversifizieren und verschiedene Marktchancen zu nutzen.',
-      bitget: 'Bei Bitget konzentriere ich mich auf Kryptowährungs-Copy-Trading mit striktem Risikomanagement.',
-      darwinex: 'Bei Darwinex manage ich einen DARWIN mit Fokus auf Forex und CFDs, mit einem Swing-Trading-Ansatz.',
-      etoro: 'Bei eToro als Popular Investor biete ich ein diversifiziertes Portfolio für Anleger, die Zugang zu mehreren Märkten suchen.',
+      title: 'Der Ansatz von TradeKuant',
+      description: 'TradeKuant handelt auf mehreren Plattformen, um das Risiko zu diversifizieren und verschiedene Marktchancen zu nutzen.',
+      bitget: 'Bei Bitget konzentriert sich TradeKuant auf Kryptowährungs-Copy-Trading mit striktem Risikomanagement.',
+      darwinex: 'Bei Darwinex managt TradeKuant einen DARWIN mit Fokus auf Forex und CFDs, mit einem Swing-Trading-Ansatz.',
+      etoro: 'Bei eToro als Popular Investor bietet TradeKuant ein diversifiziertes Portfolio für Anleger, die Zugang zu mehreren Märkten suchen.',
     },
     risk: {
       title: 'Risikomanagement',
-      description: 'Risikokontrolle ist fundamental in meiner Strategie. Ich verwende:',
+      description: 'Risikokontrolle ist fundamental in der Strategie von TradeKuant:',
       points: ['Stop Loss bei allen Trades', 'Maximales Expositionslimit pro Trade', 'Asset- und Plattform-Diversifikation', 'Ständige Drawdown-Überwachung'],
     },
     performance: {
       title: 'Performance',
-      description: 'Alle meine Ergebnisse sind verifizierbar und werden täglich automatisch von den APIs jeder Plattform aktualisiert.',
+      description: 'Alle Ergebnisse von TradeKuant sind verifizierbar und werden täglich automatisch von den APIs jeder Plattform aktualisiert.',
       cta: 'Vollständige Metriken im Dashboard anzeigen',
     },
   },
@@ -402,6 +490,50 @@ const de: typeof es = {
   },
   months: { jan: 'Jan', feb: 'Feb', mar: 'Mär', apr: 'Apr', may: 'Mai', jun: 'Jun', jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Okt', nov: 'Nov', dec: 'Dez' },
   common: { vsLastMonth: 'vs letzten Monat' },
+  howToCopy: {
+    navLabel: 'Wie man kopiert',
+    hero: {
+      title: 'Starten Sie das Kopieren in 3 Schritten',
+      subtitle: 'Wählen Sie Ihre bevorzugte Plattform und folgen Sie den Anweisungen, um TradeKuant-Trades zu kopieren.',
+    },
+    minCapital: 'Empfohlenes Mindestkapital',
+    copyOn: 'Kopieren auf',
+    faq: {
+      title: 'Häufig gestellte Fragen',
+      subtitle: 'Antworten auf häufige Fragen zum Copy Trading',
+      items: [
+        { question: 'Was ist Copy Trading?', answer: 'Copy Trading ermöglicht es Ihnen, die Trades eines erfahrenen Traders automatisch auf Ihrem eigenen Konto zu replizieren. Wenn TradeKuant eine Position eröffnet oder schließt, wird derselbe Trade proportional auf Ihrem Konto ausgeführt.' },
+        { question: 'Wie viel Kapital brauche ich zum Starten?', answer: 'Das Mindestkapital variiert je nach Plattform: Bitget ($100), Darwinex (€500) und eToro ($200). TradeKuant empfiehlt, mit dem vorgeschlagenen Minimum für jede Plattform zu beginnen.' },
+        { question: 'Kann ich jederzeit aufhören zu kopieren?', answer: 'Ja, Sie können das Copy Trading jederzeit über die Plattform pausieren oder stoppen. Sie haben die volle Kontrolle über Ihr Kapital.' },
+        { question: 'Garantieren vergangene Ergebnisse zukünftige Ergebnisse?', answer: 'Nein. Trading birgt Risiken und vergangene Ergebnisse garantieren keine zukünftigen Renditen. Investieren Sie nur Kapital, dessen Verlust Sie sich leisten können.' },
+      ],
+    },
+    disclaimer: {
+      title: 'Risikohinweis',
+      text: 'Der Handel mit Hebelwirkung birgt ein hohes Risiko und ist möglicherweise nicht für alle Anleger geeignet. Vergangene Ergebnisse garantieren keine zukünftigen Renditen. Investieren Sie nur Kapital, dessen Verlust Sie sich leisten können. TradeKuant bietet keine personalisierte Finanzberatung.',
+    },
+  },
+  blog: {
+    title: 'Blog',
+    subtitle: 'Marktanalysen und TradeKuant-Updates',
+    readMore: 'Weiterlesen',
+    backToBlog: 'Zurück zum Blog',
+    publishedBy: 'TradeKuant Team',
+    recentPosts: 'Neueste Beiträge',
+  },
+  newsletter: {
+    title: 'Bleiben Sie informiert',
+    description: 'Erhalten Sie Marktanalysen und Performance-Updates',
+    placeholder: 'Ihre E-Mail',
+    subscribe: 'Abonnieren',
+    success: 'Danke! Wir halten Sie auf dem Laufenden.',
+  },
+  contact: {
+    title: 'Kontakt',
+    subtitle: 'Für Anfragen zu Copy Trading oder Kooperationen',
+    email: 'Kontakt-E-Mail',
+    disclaimer: 'TradeKuant bietet keine personalisierte Finanzberatung.',
+  },
 };
 
 // Chinese (Simplified)
@@ -450,27 +582,27 @@ const zh: typeof es = {
   strategy: {
     title: '交易策略',
     subtitle: '投资理念和方法论',
-    intro: '我的交易方法基于系统化的风险管理和跨多个平台和资产的多元化。',
+    intro: 'TradeKuant的交易方法基于系统化的风险管理和跨多个平台和资产的多元化。',
     philosophy: {
       title: '投资理念',
-      description: '我相信纪律严明且可量化的交易方法。每一个决定都有数据和严格的技术分析支持。',
+      description: 'TradeKuant采用纪律严明且可量化的交易方法。每一个决定都有数据和严格的技术分析支持。',
       points: ['风险管理是第一优先', '跨平台和资产多元化', '结果完全透明', '基于指标的持续改进'],
     },
     approach: {
-      title: '我的方法',
-      description: '我在多个平台上操作以分散风险并利用不同的市场机会。',
-      bitget: '在Bitget上，我专注于加密货币跟单交易，通过严格的风险管理利用加密市场的波动性。',
-      darwinex: '在Darwinex上，我管理一个专注于外汇和CFD的DARWIN，采用波段交易方法和技术分析。',
-      etoro: '在eToro上作为明星投资者，我为寻求多市场敞口的投资者提供多元化投资组合。',
+      title: 'TradeKuant的方法',
+      description: 'TradeKuant在多个平台上操作以分散风险并利用不同的市场机会。',
+      bitget: '在Bitget上，TradeKuant专注于加密货币跟单交易，通过严格的风险管理利用加密市场的波动性。',
+      darwinex: '在Darwinex上，TradeKuant管理一个专注于外汇和CFD的DARWIN，采用波段交易方法和技术分析。',
+      etoro: '在eToro上作为明星投资者，TradeKuant为寻求多市场敞口的投资者提供多元化投资组合。',
     },
     risk: {
       title: '风险管理',
-      description: '风险控制是我策略的基础。我使用：',
+      description: '风险控制是TradeKuant策略的基础：',
       points: ['所有交易都设置止损', '每笔交易的最大敞口限制', '资产和平台多元化', '持续监控回撤'],
     },
     performance: {
       title: '业绩',
-      description: '我所有的结果都是可验证的，并且每天自动从每个平台的API更新。',
+      description: 'TradeKuant所有的结果都是可验证的，并且每天自动从每个平台的API更新。',
       cta: '在仪表板上查看完整指标',
     },
   },
@@ -483,6 +615,50 @@ const zh: typeof es = {
   },
   months: { jan: '一月', feb: '二月', mar: '三月', apr: '四月', may: '五月', jun: '六月', jul: '七月', aug: '八月', sep: '九月', oct: '十月', nov: '十一月', dec: '十二月' },
   common: { vsLastMonth: '对比上月' },
+  howToCopy: {
+    navLabel: '如何跟单',
+    hero: {
+      title: '3步开始跟单',
+      subtitle: '选择您喜欢的平台，按照说明开始复制TradeKuant的交易。',
+    },
+    minCapital: '建议最低资金',
+    copyOn: '在此平台跟单',
+    faq: {
+      title: '常见问题',
+      subtitle: '关于跟单交易的常见问题解答',
+      items: [
+        { question: '什么是跟单交易？', answer: '跟单交易允许您在自己的账户中自动复制经验丰富的交易者的交易。当TradeKuant开仓或平仓时，相同的交易会按比例在您的账户中执行。' },
+        { question: '我需要多少资金才能开始？', answer: '最低资金因平台而异：Bitget（$100）、Darwinex（€500）和eToro（$200）。TradeKuant建议从每个平台建议的最低金额开始。' },
+        { question: '我可以随时停止跟单吗？', answer: '是的，您可以随时从平台暂停或停止跟单交易。您对您的资金拥有完全控制权。' },
+        { question: '过去的业绩能保证未来的结果吗？', answer: '不能。交易涉及风险，过去的结果不能保证未来的回报。只投资您能承受损失的资金。' },
+      ],
+    },
+    disclaimer: {
+      title: '风险警告',
+      text: '杠杆交易具有高风险，可能不适合所有投资者。过去的结果不能保证未来的回报。只投资您能承受损失的资金。TradeKuant不提供个性化的财务建议。',
+    },
+  },
+  blog: {
+    title: '博客',
+    subtitle: '市场分析和TradeKuant动态',
+    readMore: '阅读更多',
+    backToBlog: '返回博客',
+    publishedBy: 'TradeKuant团队',
+    recentPosts: '最新文章',
+  },
+  newsletter: {
+    title: '保持关注',
+    description: '接收市场分析和业绩更新',
+    placeholder: '您的邮箱',
+    subscribe: '订阅',
+    success: '谢谢！我们会及时通知您。',
+  },
+  contact: {
+    title: '联系我们',
+    subtitle: '有关跟单交易或合作的咨询',
+    email: '联系邮箱',
+    disclaimer: 'TradeKuant不提供个性化的财务建议。',
+  },
 };
 
 // French
@@ -531,27 +707,27 @@ const fr: typeof es = {
   strategy: {
     title: 'Stratégie de Trading',
     subtitle: 'Philosophie et méthodologie d\'investissement',
-    intro: 'Mon approche de trading est basée sur une gestion systématique des risques et une diversification à travers plusieurs plateformes et actifs.',
+    intro: 'L\'approche de TradeKuant est basée sur une gestion systématique des risques et une diversification à travers plusieurs plateformes et actifs.',
     philosophy: {
       title: 'Philosophie d\'Investissement',
-      description: 'Je crois en une approche disciplinée et quantifiable du trading. Chaque décision est soutenue par des données et une analyse technique rigoureuse.',
+      description: 'TradeKuant applique une approche disciplinée et quantifiable du trading. Chaque décision est soutenue par des données et une analyse technique rigoureuse.',
       points: ['La gestion des risques comme priorité numéro un', 'Diversification entre plateformes et actifs', 'Transparence totale des résultats', 'Amélioration continue basée sur les métriques'],
     },
     approach: {
-      title: 'Mon Approche',
-      description: 'J\'opère sur plusieurs plateformes pour diversifier le risque et profiter de différentes opportunités de marché.',
-      bitget: 'Sur Bitget, je me concentre sur le copy trading de cryptomonnaies, exploitant la volatilité du marché crypto avec une gestion stricte des risques.',
-      darwinex: 'Sur Darwinex, je gère un DARWIN axé sur le forex et les CFDs, avec une approche de swing trading et d\'analyse technique.',
-      etoro: 'Sur eToro en tant que Popular Investor, j\'offre un portefeuille diversifié pour les investisseurs recherchant une exposition à plusieurs marchés.',
+      title: 'L\'Approche de TradeKuant',
+      description: 'TradeKuant opère sur plusieurs plateformes pour diversifier le risque et profiter de différentes opportunités de marché.',
+      bitget: 'Sur Bitget, TradeKuant se concentre sur le copy trading de cryptomonnaies, exploitant la volatilité du marché crypto avec une gestion stricte des risques.',
+      darwinex: 'Sur Darwinex, TradeKuant gère un DARWIN axé sur le forex et les CFDs, avec une approche de swing trading et d\'analyse technique.',
+      etoro: 'Sur eToro en tant que Popular Investor, TradeKuant offre un portefeuille diversifié pour les investisseurs recherchant une exposition à plusieurs marchés.',
     },
     risk: {
       title: 'Gestion des Risques',
-      description: 'Le contrôle des risques est fondamental dans ma stratégie. J\'utilise:',
+      description: 'Le contrôle des risques est fondamental dans la stratégie de TradeKuant:',
       points: ['Stop loss sur tous les trades', 'Limite d\'exposition maximale par trade', 'Diversification des actifs et plateformes', 'Surveillance constante du drawdown'],
     },
     performance: {
       title: 'Performance',
-      description: 'Tous mes résultats sont vérifiables et mis à jour quotidiennement automatiquement depuis les APIs de chaque plateforme.',
+      description: 'Tous les résultats de TradeKuant sont vérifiables et mis à jour quotidiennement automatiquement depuis les APIs de chaque plateforme.',
       cta: 'Voir les métriques complètes sur le Dashboard',
     },
   },
@@ -564,6 +740,50 @@ const fr: typeof es = {
   },
   months: { jan: 'Jan', feb: 'Fév', mar: 'Mar', apr: 'Avr', may: 'Mai', jun: 'Juin', jul: 'Juil', aug: 'Août', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Déc' },
   common: { vsLastMonth: 'vs mois dernier' },
+  howToCopy: {
+    navLabel: 'Comment Copier',
+    hero: {
+      title: 'Commencez à Copier en 3 Étapes',
+      subtitle: 'Sélectionnez votre plateforme préférée et suivez les instructions pour commencer à copier les trades de TradeKuant.',
+    },
+    minCapital: 'Capital minimum recommandé',
+    copyOn: 'Copier sur',
+    faq: {
+      title: 'Questions Fréquentes',
+      subtitle: 'Réponses aux questions courantes sur le copy trading',
+      items: [
+        { question: "Qu'est-ce que le copy trading?", answer: "Le copy trading vous permet de répliquer automatiquement les trades d'un trader expérimenté sur votre propre compte. Lorsque TradeKuant ouvre ou ferme une position, la même opération s'exécute proportionnellement sur votre compte." },
+        { question: 'De combien de capital ai-je besoin pour commencer?', answer: 'Le capital minimum varie selon la plateforme: Bitget ($100), Darwinex (€500) et eToro ($200). TradeKuant recommande de commencer avec le minimum suggéré pour chaque plateforme.' },
+        { question: 'Puis-je arrêter de copier à tout moment?', answer: 'Oui, vous pouvez mettre en pause ou arrêter le copy trading à tout moment depuis la plateforme. Vous avez un contrôle total sur votre capital.' },
+        { question: 'Les résultats passés garantissent-ils les résultats futurs?', answer: 'Non. Le trading comporte des risques et les résultats passés ne garantissent pas les rendements futurs. Investissez uniquement le capital que vous pouvez vous permettre de perdre.' },
+      ],
+    },
+    disclaimer: {
+      title: 'Avertissement sur les Risques',
+      text: "Le trading avec effet de levier comporte un niveau de risque élevé et peut ne pas convenir à tous les investisseurs. Les résultats passés ne garantissent pas les rendements futurs. Investissez uniquement le capital que vous pouvez vous permettre de perdre. TradeKuant ne fournit pas de conseils financiers personnalisés.",
+    },
+  },
+  blog: {
+    title: 'Blog',
+    subtitle: 'Analyses de marché et actualités TradeKuant',
+    readMore: 'Lire la suite',
+    backToBlog: 'Retour au Blog',
+    publishedBy: 'Équipe TradeKuant',
+    recentPosts: 'Articles Récents',
+  },
+  newsletter: {
+    title: 'Restez Informé',
+    description: 'Recevez des analyses de marché et des mises à jour de performance',
+    placeholder: 'Votre email',
+    subscribe: "S'abonner",
+    success: 'Merci! Nous vous tiendrons informé.',
+  },
+  contact: {
+    title: 'Contact',
+    subtitle: 'Pour les questions sur le copy trading ou les collaborations',
+    email: 'Email de contact',
+    disclaimer: 'TradeKuant ne fournit pas de conseils financiers personnalisés.',
+  },
 };
 
 // Arabic
@@ -612,27 +832,27 @@ const ar: typeof es = {
   strategy: {
     title: 'استراتيجية التداول',
     subtitle: 'فلسفة الاستثمار والمنهجية',
-    intro: 'يعتمد نهج التداول الخاص بي على إدارة المخاطر المنهجية والتنويع عبر منصات وأصول متعددة.',
+    intro: 'يعتمد نهج TradeKuant على إدارة المخاطر المنهجية والتنويع عبر منصات وأصول متعددة.',
     philosophy: {
       title: 'فلسفة الاستثمار',
-      description: 'أؤمن بنهج منضبط وقابل للقياس في التداول. كل قرار مدعوم بالبيانات والتحليل الفني الدقيق.',
+      description: 'يطبق TradeKuant نهجاً منضبطاً وقابلاً للقياس في التداول. كل قرار مدعوم بالبيانات والتحليل الفني الدقيق.',
       points: ['إدارة المخاطر كأولوية قصوى', 'التنويع عبر المنصات والأصول', 'الشفافية الكاملة في النتائج', 'التحسين المستمر بناءً على المقاييس'],
     },
     approach: {
-      title: 'نهجي',
-      description: 'أعمل على منصات متعددة لتنويع المخاطر والاستفادة من فرص السوق المختلفة.',
-      bitget: 'في Bitget أركز على نسخ تداول العملات المشفرة، مستفيداً من تقلبات سوق العملات المشفرة مع إدارة صارمة للمخاطر.',
-      darwinex: 'في Darwinex أدير DARWIN يركز على الفوركس وCFDs، بنهج التداول المتأرجح والتحليل الفني.',
-      etoro: 'في eToro كمستثمر مشهور، أقدم محفظة متنوعة للمستثمرين الباحثين عن التعرض لأسواق متعددة.',
+      title: 'نهج TradeKuant',
+      description: 'يعمل TradeKuant على منصات متعددة لتنويع المخاطر والاستفادة من فرص السوق المختلفة.',
+      bitget: 'في Bitget يركز TradeKuant على نسخ تداول العملات المشفرة، مستفيداً من تقلبات سوق العملات المشفرة مع إدارة صارمة للمخاطر.',
+      darwinex: 'في Darwinex يدير TradeKuant DARWIN يركز على الفوركس وCFDs، بنهج التداول المتأرجح والتحليل الفني.',
+      etoro: 'في eToro كمستثمر مشهور، يقدم TradeKuant محفظة متنوعة للمستثمرين الباحثين عن التعرض لأسواق متعددة.',
     },
     risk: {
       title: 'إدارة المخاطر',
-      description: 'التحكم في المخاطر أساسي في استراتيجيتي. أستخدم:',
+      description: 'التحكم في المخاطر أساسي في استراتيجية TradeKuant:',
       points: ['وقف الخسارة في جميع الصفقات', 'حد أقصى للتعرض لكل صفقة', 'تنويع الأصول والمنصات', 'مراقبة مستمرة للتراجع'],
     },
     performance: {
       title: 'الأداء',
-      description: 'جميع نتائجي قابلة للتحقق ويتم تحديثها يومياً تلقائياً من واجهات برمجة التطبيقات لكل منصة.',
+      description: 'جميع نتائج TradeKuant قابلة للتحقق ويتم تحديثها يومياً تلقائياً من واجهات برمجة التطبيقات لكل منصة.',
       cta: 'عرض المقاييس الكاملة في لوحة التحكم',
     },
   },
@@ -645,6 +865,50 @@ const ar: typeof es = {
   },
   months: { jan: 'يناير', feb: 'فبراير', mar: 'مارس', apr: 'أبريل', may: 'مايو', jun: 'يونيو', jul: 'يوليو', aug: 'أغسطس', sep: 'سبتمبر', oct: 'أكتوبر', nov: 'نوفمبر', dec: 'ديسمبر' },
   common: { vsLastMonth: 'مقارنة بالشهر الماضي' },
+  howToCopy: {
+    navLabel: 'كيفية النسخ',
+    hero: {
+      title: 'ابدأ النسخ في 3 خطوات',
+      subtitle: 'اختر منصتك المفضلة واتبع التعليمات لبدء نسخ صفقات TradeKuant.',
+    },
+    minCapital: 'الحد الأدنى الموصى به لرأس المال',
+    copyOn: 'انسخ على',
+    faq: {
+      title: 'الأسئلة الشائعة',
+      subtitle: 'إجابات على الأسئلة الشائعة حول نسخ التداول',
+      items: [
+        { question: 'ما هو نسخ التداول؟', answer: 'يتيح لك نسخ التداول تكرار صفقات المتداول ذو الخبرة تلقائياً في حسابك الخاص. عندما يفتح أو يغلق TradeKuant مركزاً، يتم تنفيذ نفس الصفقة بشكل متناسب في حسابك.' },
+        { question: 'كم أحتاج من رأس المال للبدء؟', answer: 'يختلف الحد الأدنى لرأس المال حسب المنصة: Bitget ($100)، Darwinex (€500) و eToro ($200). توصي TradeKuant بالبدء بالحد الأدنى المقترح لكل منصة.' },
+        { question: 'هل يمكنني التوقف عن النسخ في أي وقت؟', answer: 'نعم، يمكنك إيقاف أو وقف نسخ التداول مؤقتاً في أي وقت من المنصة. لديك السيطرة الكاملة على رأس مالك.' },
+        { question: 'هل تضمن النتائج السابقة النتائج المستقبلية؟', answer: 'لا. التداول ينطوي على مخاطر والنتائج السابقة لا تضمن العوائد المستقبلية. استثمر فقط رأس المال الذي يمكنك تحمل خسارته.' },
+      ],
+    },
+    disclaimer: {
+      title: 'تحذير المخاطر',
+      text: 'التداول بالرافعة المالية ينطوي على مستوى عالٍ من المخاطر وقد لا يكون مناسباً لجميع المستثمرين. النتائج السابقة لا تضمن العوائد المستقبلية. استثمر فقط رأس المال الذي يمكنك تحمل خسارته. TradeKuant لا تقدم نصائح مالية شخصية.',
+    },
+  },
+  blog: {
+    title: 'المدونة',
+    subtitle: 'تحليلات السوق وأخبار TradeKuant',
+    readMore: 'اقرأ المزيد',
+    backToBlog: 'العودة للمدونة',
+    publishedBy: 'فريق TradeKuant',
+    recentPosts: 'المقالات الأخيرة',
+  },
+  newsletter: {
+    title: 'ابق على اطلاع',
+    description: 'احصل على تحليلات السوق وتحديثات الأداء',
+    placeholder: 'بريدك الإلكتروني',
+    subscribe: 'اشترك',
+    success: 'شكراً! سنبقيك على اطلاع.',
+  },
+  contact: {
+    title: 'اتصل بنا',
+    subtitle: 'للاستفسارات حول نسخ التداول أو التعاون',
+    email: 'البريد الإلكتروني للتواصل',
+    disclaimer: 'TradeKuant لا تقدم نصائح مالية شخصية.',
+  },
 };
 
 // Export translations object AFTER all language constants are defined
