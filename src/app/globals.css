@@ -523,10 +523,23 @@
   @media (max-width: 768px) {
     section {
       overflow-x: hidden;
+      max-width: 100vw;
     }
 
     .flex-wrap {
       justify-content: center;
     }
+
+    /* Ensure absolute positioned elements don't cause overflow */
+    .hero-glow,
+    .grid-pattern,
+    [class*="absolute"] {
+      max-width: 100vw;
+    }
+  }
+
+  /* Global overflow prevention */
+  .overflow-x-hidden {
+    overflow-x: hidden !important;
   }
 }

@@ -39,7 +39,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border/50 bg-card/30">
+    <footer className="relative border-t border-border/50 bg-card/30 overflow-hidden w-full">
       {/* Subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
 

@@ -98,13 +98,13 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col" dir={dir}>
+    <div className="flex flex-col overflow-x-hidden w-full" dir={dir}>
       {/* Hero Section */}
-      <section className="relative min-h-screen overflow-hidden">
+      <section className="relative min-h-screen overflow-hidden w-full">
         {/* Background effects */}
         <div className="absolute inset-0 grid-pattern" />
         <div className="hero-glow absolute left-1/2 top-1/4 -translate-x-1/2" />
-        <div className="hero-glow absolute right-0 top-1/2 opacity-50" />
+        <div className="hero-glow absolute right-1/4 top-1/2 opacity-50" />
 
         <div className="container-wide relative z-10 flex min-h-screen flex-col items-center justify-center py-20 pt-32">
           {/* Badge */}
@@ -203,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative border-t border-border/50">
+      <section id="features" className="relative border-t border-border/50 overflow-hidden w-full">
         <div className="absolute inset-0 grid-pattern opacity-50" />
 
         <div className="container-wide relative z-10 section-padding">
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* Platforms Section */}
-      <section className="border-t border-border/50">
+      <section className="border-t border-border/50 overflow-hidden w-full">
         <div className="container-wide section-padding">
           <div className="mx-auto mb-16 max-w-2xl text-center">
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary">
@@ -311,7 +311,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative border-t border-border/50">
+      <section className="relative border-t border-border/50 overflow-hidden w-full">
         <div className="hero-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
 
         <div className="container-wide relative z-10 section-padding">
