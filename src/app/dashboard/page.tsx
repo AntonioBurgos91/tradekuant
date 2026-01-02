@@ -601,12 +601,12 @@ export default function DashboardPage() {
     <div className="min-h-screen pt-20">
       {/* Header */}
       <div className="border-b border-border/50">
-        <div className="container-wide py-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <div className="mb-2 flex items-center gap-3">
-                <h1 className="text-3xl font-bold tracking-tight">{t.dashboard.title}</h1>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="text-center sm:text-left">
+              <div className="mb-2 flex items-center justify-center sm:justify-start gap-3">
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t.dashboard.title}</h1>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-2 sm:px-3 py-1 text-xs font-medium text-primary">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
@@ -614,12 +614,12 @@ export default function DashboardPage() {
                   {t.dashboard.live}
                 </span>
               </div>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground">
                 {t.dashboard.subtitle}
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center sm:justify-end gap-3">
               <button
                 onClick={fetchData}
                 disabled={isLoading}
@@ -638,7 +638,7 @@ export default function DashboardPage() {
       </div>
 
       {error && (
-        <div className="container-wide py-4">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
           <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-red-400">
             {error}
           </div>
