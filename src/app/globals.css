@@ -132,7 +132,7 @@
 .light {
   --background: #FFFFFF;
   --foreground: #0F172A;
-  --card: #F8FAFC;
+  --card: #FFFFFF;
   --card-foreground: #0F172A;
   --popover: #FFFFFF;
   --popover-foreground: #0F172A;
@@ -161,6 +161,12 @@
   --sidebar-accent-foreground: #0F172A;
   --sidebar-border: #E2E8F0;
   --sidebar-ring: #059669;
+
+  /* Trading specific - Light mode adjusted */
+  --profit: #059669;
+  --loss: #DC2626;
+  --warning: #D97706;
+  --info: #2563EB;
 }
 
 /* ============================================
@@ -173,11 +179,14 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   /* Typography hierarchy */
@@ -238,6 +247,12 @@
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.5) 100%);
   }
 
+  .light .metric-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 252, 1) 100%);
+    border-color: #E2E8F0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
   .metric-card::before {
     content: '';
     position: absolute;
@@ -246,6 +261,10 @@
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+  }
+
+  .light .metric-card::before {
+    background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.4), transparent);
   }
 
   /* Platform badges */
@@ -273,15 +292,32 @@
 
   /* Profit/Loss indicators */
   .value-positive {
-    @apply text-[#22C55E];
+    color: var(--profit);
   }
 
   .value-negative {
-    @apply text-[#EF4444];
+    color: var(--loss);
   }
 
   .value-neutral {
     @apply text-muted-foreground;
+  }
+
+  /* Trading colors for use in components */
+  .text-profit {
+    color: var(--profit);
+  }
+
+  .text-loss {
+    color: var(--loss);
+  }
+
+  .bg-profit {
+    background-color: var(--profit);
+  }
+
+  .bg-loss {
+    background-color: var(--loss);
   }
 
   /* Gradient text */
@@ -441,9 +477,18 @@
   /* Container max widths */
   .container-tight {
     @apply mx-auto max-w-4xl px-4;
+    max-width: calc(100vw - 2rem);
   }
 
   .container-wide {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  @media (max-width: 640px) {
+    .container-wide {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      max-width: 100%;
+    }
   }
 }

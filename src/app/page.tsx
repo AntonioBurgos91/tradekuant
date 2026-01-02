@@ -133,8 +133,8 @@ export default function Home() {
                   {getStatLabel(stat.key)}
                 </p>
                 <p className={`text-2xl font-bold sm:text-3xl ${
-                  stat.value.startsWith('+') ? 'text-[#22C55E]' :
-                  stat.value.startsWith('-') ? 'text-[#EF4444]' : 'text-foreground'
+                  stat.value.startsWith('+') ? 'text-profit' :
+                  stat.value.startsWith('-') ? 'text-loss' : 'text-foreground'
                 }`}>
                   {stat.value}
                 </p>

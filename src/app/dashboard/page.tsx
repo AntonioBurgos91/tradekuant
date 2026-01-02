@@ -87,8 +87,8 @@ function MetricCard({
             <div className="h-8 w-24 animate-pulse rounded bg-secondary" />
           ) : (
             <p className={`text-2xl font-bold ${
-              trend === 'up' ? 'text-[#22C55E]' :
-              trend === 'down' ? 'text-[#EF4444]' : 'text-foreground'
+              trend === 'up' ? 'text-profit' :
+              trend === 'down' ? 'text-loss' : 'text-foreground'
             }`}>
               {value}
             </p>
@@ -105,11 +105,11 @@ function MetricCard({
       {trendValue && trend && !isLoading && (
         <div className="mt-4 flex items-center gap-1 text-xs">
           {trend === 'up' ? (
-            <ArrowUpRight className="h-3 w-3 text-[#22C55E]" />
+            <ArrowUpRight className="h-3 w-3 text-profit" />
           ) : (
-            <ArrowDownRight className="h-3 w-3 text-[#EF4444]" />
+            <ArrowDownRight className="h-3 w-3 text-loss" />
           )}
-          <span className={trend === 'up' ? 'text-[#22C55E]' : 'text-[#EF4444]'}>
+          <span className={trend === 'up' ? 'text-profit' : 'text-loss'}>
             {trendValue}
           </span>
           <span className="text-muted-foreground">{vsLastMonth}</span>
@@ -166,7 +166,7 @@ function PlatformCard({
             {isLoading ? (
               <div className="h-6 w-16 animate-pulse rounded bg-secondary" />
             ) : (
-              <p className={`text-lg font-bold ${isPositive ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
+              <p className={`text-lg font-bold ${isPositive ? 'text-profit' : 'text-loss'}`}>
                 {isPositive ? '+' : ''}{platform.return.toFixed(2)}%
               </p>
             )}
@@ -189,7 +189,7 @@ function PlatformCard({
             {isLoading ? (
               <div className="h-5 w-16 animate-pulse rounded bg-secondary" />
             ) : (
-              <p className="font-semibold text-[#EF4444]">{platform.drawdown.toFixed(1)}%</p>
+              <p className="font-semibold text-loss">{platform.drawdown.toFixed(1)}%</p>
             )}
           </div>
 
@@ -459,7 +459,7 @@ function EquityCurveChart({
                 className="rounded-lg bg-secondary/30 p-2 text-center"
               >
                 <p className="text-[10px] text-muted-foreground">{platform?.name}</p>
-                <p className={`text-sm font-semibold ${change >= 0 ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
+                <p className={`text-sm font-semibold ${change >= 0 ? 'text-profit' : 'text-loss'}`}>
                   {change >= 0 ? '+' : ''}{change.toFixed(1)}%
                 </p>
               </div>
@@ -515,12 +515,12 @@ function MonthlyReturnsChart({
 
             return (
               <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
-                <span className={`text-xs font-medium ${isPositive ? 'text-[#22C55E]' : 'text-[#EF4444]'}`}>
+                <span className={`text-xs font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
                   {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value}%` : '-'}
                 </span>
                 <div
                   className={`w-full rounded-t transition-all hover:opacity-80 ${
-                    isPositive ? 'bg-[#22C55E]' : 'bg-[#EF4444]'
+                    isPositive ? 'bg-profit' : 'bg-loss'
                   }`}
                   style={{ height: `${Math.max(height, 4)}%`, minHeight: '4px' }}
                 />

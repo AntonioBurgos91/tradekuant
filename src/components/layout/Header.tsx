@@ -54,6 +54,21 @@ export function Header() {
     >
       <div className="container-wide">
         <div className="flex h-16 items-center justify-between lg:h-20">
+          {/* Mobile: Menu button (left) */}
+          <div className="flex items-center lg:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/20">
@@ -110,22 +125,10 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile: Theme + Language + Menu */}
+          {/* Mobile: Theme + Language (right) */}
           <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle variant="compact" />
             <LanguageSwitcher variant="compact" />
-
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </button>
           </div>
         </div>
 

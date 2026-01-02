@@ -1,8 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
 import {
@@ -27,10 +25,8 @@ export default function StrategyPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-background" dir={dir}>
-      <Header />
-
-      <main className="flex-1 pt-20">
+    <div className="flex min-h-screen flex-col bg-background pt-20" dir={dir}>
+      <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-primary/5 via-background to-background">
           <div className="absolute inset-0 bg-grid-pattern opacity-5" />
@@ -219,8 +215,6 @@ export default function StrategyPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
