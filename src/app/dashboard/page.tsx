@@ -521,27 +521,29 @@ function MonthlyReturnsChart({
 
       {/* Bar Chart */}
       {isLoading ? (
-        <div className="h-32 animate-pulse rounded bg-secondary/30" />
+        <div className="h-28 animate-pulse rounded bg-secondary/30" />
       ) : (
-        <div className="flex h-32 items-end justify-center gap-1 px-2">
-          {yearData.map((month) => {
-            const height = maxValue > 0 ? (Math.abs(month.value) / maxValue) * 100 : 0;
-            const isPositive = month.value >= 0;
-            const monthLabel = months[month.month.split('-')[1]] || month.month.split('-')[1];
+        <div className="w-full">
+          <div className="flex h-28 items-end justify-between gap-[2px] sm:gap-1">
+            {yearData.map((month) => {
+              const height = maxValue > 0 ? (Math.abs(month.value) / maxValue) * 100 : 0;
+              const isPositive = month.value >= 0;
+              const monthLabel = months[month.month.split('-')[1]] || month.month.split('-')[1];
 
-            return (
-              <div key={month.month} className="flex flex-1 max-w-[40px] flex-col items-center gap-1">
-                <span className={`text-[10px] font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
-                  {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value.toFixed(0)}%` : ''}
-                </span>
-                <div
-                  className={`w-full rounded-t transition-all ${isPositive ? 'bg-profit' : 'bg-loss'}`}
-                  style={{ height: `${Math.max(height, 3)}%`, minHeight: '2px' }}
-                />
-                <span className="text-[9px] text-muted-foreground">{monthLabel}</span>
-              </div>
-            );
-          })}
+              return (
+                <div key={month.month} className="flex flex-1 flex-col items-center gap-0.5">
+                  <span className={`text-[8px] sm:text-[10px] font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
+                    {month.value !== 0 ? `${month.value.toFixed(0)}%` : ''}
+                  </span>
+                  <div
+                    className={`w-full max-w-[30px] rounded-t transition-all ${isPositive ? 'bg-profit' : 'bg-loss'}`}
+                    style={{ height: `${Math.max(height, 3)}%`, minHeight: '2px' }}
+                  />
+                  <span className="text-[7px] sm:text-[9px] text-muted-foreground">{monthLabel}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
