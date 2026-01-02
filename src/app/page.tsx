@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n';
@@ -16,24 +17,50 @@ import {
   RefreshCw,
 } from 'lucide-react';
 
-// Platform data
-const PLATFORMS_DATA = [
+// Fallback data
+const FALLBACK_PLATFORMS = [
   { name: 'Bitget', color: '#10B981', return: '+16.92%' },
   { name: 'Darwinex', color: '#3B82F6', return: '+6.17%' },
   { name: 'eToro', color: '#22C55E', return: '+5.07%' },
 ];
 
-const STATS_DATA = [
+const FALLBACK_STATS = [
   { key: 'totalReturn', value: '+228.15%' },
   { key: 'maxDrawdown', value: '-8.5%' },
   { key: 'sharpeRatio', value: '2.34' },
   { key: 'winRate', value: '68.4%' },
 ];
 
-const FEATURE_ICONS = [TrendingUp, Shield, RefreshCw, LineChart, Users, Lock];
+interface StatsData {
+  stats: { key: string; value: string }[];
+  platforms: { name: string; color: string; return: string }[];
+}
 
 export default function Home() {
   const { t, dir } = useLanguage();
+  const [statsData, setStatsData] = useState<StatsData>({
+    stats: FALLBACK_STATS,
+    platforms: FALLBACK_PLATFORMS,
+  });
+
+  // Fetch dynamic stats from API
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const response = await fetch('/api/stats');
+        const result = await response.json();
+        if (result.success && result.data) {
+          setStatsData({
+            stats: result.data.stats,
+            platforms: result.data.platforms,
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    }
+    fetchStats();
+  }, []);
 
   const FEATURES = [
     { icon: TrendingUp, ...t.features.metrics },
@@ -101,29 +128,29 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="mb-16 flex flex-col gap-4 sm:flex-row">
-            <Link href="/dashboard">
+            <Link href="/como-copiar">
               <Button
                 size="lg"
                 className="h-12 gap-2 bg-primary px-8 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30"
               >
-                {t.hero.cta}
+                {t.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="#features">
+            <Link href="/dashboard">
               <Button
                 size="lg"
                 variant="outline"
                 className="h-12 gap-2 border-border/50 px-8 text-base font-semibold hover:bg-secondary"
               >
-                {t.hero.learnMore}
+                {t.hero.ctaSecondary}
               </Button>
             </Link>
           </div>
 
           {/* Stats Grid */}
           <div className="grid w-full max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
-            {STATS_DATA.map((stat, i) => (
+            {statsData.stats.map((stat, i) => (
               <div
                 key={stat.key}
                 className="stats-card text-center"
@@ -145,7 +172,7 @@ export default function Home() {
 
           {/* Platform badges */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-            {PLATFORMS_DATA.map((platform) => (
+            {statsData.platforms.map((platform) => (
               <div
                 key={platform.name}
                 className="platform-badge"
@@ -258,7 +285,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <ul className="space-y-2">
+                <ul className="mb-4 space-y-2">
                   {platform.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <CheckCircle2 className="h-4 w-4 text-primary" />
@@ -266,6 +293,17 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+
+                <Link href={`/como-copiar#${platform.name.toLowerCase()}`}>
+                  <Button
+                    variant="outline"
+                    className="w-full gap-2 border-border/50 hover:border-primary/50 hover:bg-primary/5"
+                    style={{ color: platform.color }}
+                  >
+                    {t.platforms.copyButton}
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             ))}
           </div>
@@ -291,13 +329,22 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <Link href="/dashboard">
+              <Link href="/como-copiar">
                 <Button
                   size="lg"
                   className="h-14 gap-2 bg-primary px-10 text-lg font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30"
                 >
                   {t.cta.button}
                   <ArrowRight className="h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-14 gap-2 border-border/50 px-10 text-lg font-semibold hover:bg-secondary"
+                >
+                  {t.hero.ctaSecondary}
                 </Button>
               </Link>
             </div>

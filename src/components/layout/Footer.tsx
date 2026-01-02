@@ -1,9 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { TrendingUp, ExternalLink } from 'lucide-react';
+import { TrendingUp, ExternalLink, Twitter, Youtube, Send } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { NewsletterForm } from '@/components/common/NewsletterForm';
+
+// Social media links (replace with actual URLs)
+const socialLinks = [
+  { name: 'Twitter', href: 'https://twitter.com/tradekuant', icon: Twitter },
+  { name: 'YouTube', href: 'https://youtube.com/@tradekuant', icon: Youtube },
+  { name: 'Telegram', href: 'https://t.me/tradekuant', icon: Send },
+];
 
 // Links to copy trading profiles (replace PLACEHOLDER with real IDs)
 const platformCopyLinks = [
@@ -147,7 +154,23 @@ export function Footer() {
             &copy; {currentYear} TradeKuant. {t.footer.copyright}.
           </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.name}
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                >
+                  <social.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+
             <span className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
+import { GoogleAnalytics } from "@/components/common/GoogleAnalytics";
 import { LanguageProvider } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 import { APP_NAME, APP_URL } from "@/lib/constants";
@@ -150,6 +151,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <GoogleAnalytics />
       </head>
       <body className={`${inter.variable} font-sans`}>
         <ThemeProvider>
