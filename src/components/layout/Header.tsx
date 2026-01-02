@@ -45,14 +45,14 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 z-50 w-full transition-all duration-300 overflow-hidden',
+        'fixed top-0 z-50 w-full transition-all duration-300',
         isScrolled
           ? 'border-b border-border/50 bg-background/80 backdrop-blur-xl'
           : 'bg-transparent'
       )}
       dir={dir}
     >
-      <div className="container-wide overflow-hidden">
+      <div className="container-wide">
         <div className="flex h-16 items-center justify-between lg:h-20">
           {/* Mobile: Menu button (left) */}
           <div className="flex items-center lg:hidden">
