@@ -615,38 +615,34 @@ function MonthlyReturnsChart({
             </table>
           </div>
 
-          {/* Mobile Card View */}
-          <div className="md:hidden space-y-3">
+          {/* Mobile Card View - Compact */}
+          <div className="md:hidden space-y-2">
             {availableYears.map((year) => {
               const yearData = groupedByYear[year] || [];
               const ytd = calculateYTD(yearData);
 
               return (
-                <div key={year} className="rounded-lg border border-border/50 bg-card/30 p-3">
-                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/30">
-                    <span className="font-bold">{year}</span>
-                    <div className={`px-2.5 py-1 rounded-full text-xs font-semibold ${getColorClass(ytd)}`}>
+                <div key={year} className="rounded-lg border border-border/50 bg-card/30 p-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-bold">{year}</span>
+                    <div className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${getColorClass(ytd)}`}>
                       YTD: {ytd > 0 ? '+' : ''}{ytd.toFixed(1)}%
                     </div>
                   </div>
-                  <div className="grid grid-cols-4 gap-1.5">
+                  <div className="grid grid-cols-6 gap-1">
                     {Object.entries(months).map(([monthKey, monthLabel]) => {
                       const monthData = yearData.find(m => m.month === `${year}-${monthKey}`);
                       const value = monthData?.value;
                       return (
                         <div
                           key={monthKey}
-                          className={`flex flex-col items-center justify-center p-1.5 rounded text-center ${
+                          className={`flex flex-col items-center justify-center py-1 px-0.5 rounded text-center ${
                             value !== undefined ? getColorClass(value) : 'bg-muted/30'
                           }`}
                         >
-                          <span className="text-[9px] uppercase tracking-wide opacity-70">
-                            {monthLabel}
-                          </span>
-                          <span className="text-[10px] font-semibold">
-                            {value !== undefined
-                              ? `${value > 0 ? '+' : ''}${value.toFixed(1)}%`
-                              : '-'}
+                          <span className="text-[8px] uppercase opacity-60">{monthLabel}</span>
+                          <span className="text-[9px] font-semibold">
+                            {value !== undefined ? `${value > 0 ? '+' : ''}${value.toFixed(0)}%` : '-'}
                           </span>
                         </div>
                       );
@@ -658,56 +654,82 @@ function MonthlyReturnsChart({
           </div>
         </div>
       ) : (
-        /* Single Year - Bar Chart View */
-        <div className="flex h-40 items-end justify-between gap-1 sm:gap-2">
-          {filteredData.map((month) => {
-            const height = maxValue > 0 ? (Math.abs(month.value) / maxValue) * 100 : 0;
-            const isPositive = month.value >= 0;
-            const monthKey = month.month.split('-')[1];
-            const monthLabel = months[monthKey] || monthKey;
+        /* Single Year View */
+        <>
+          {/* Desktop - Bar Chart */}
+          <div className="hidden sm:flex h-40 items-end justify-between gap-2">
+            {filteredData.map((month) => {
+              const height = maxValue > 0 ? (Math.abs(month.value) / maxValue) * 100 : 0;
+              const isPositive = month.value >= 0;
+              const monthKey = month.month.split('-')[1];
+              const monthLabel = months[monthKey] || monthKey;
 
-            return (
-              <div key={month.month} className="flex flex-1 flex-col items-center gap-1 sm:gap-2">
-                <span className={`text-[10px] sm:text-xs font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
-                  {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value}%` : '-'}
-                </span>
-                <div
-                  className={`w-full rounded-t transition-all hover:opacity-80 ${
-                    isPositive ? 'bg-profit' : 'bg-loss'
-                  }`}
-                  style={{ height: `${Math.max(height, 4)}%`, minHeight: '4px' }}
-                />
-                <span className="text-[10px] sm:text-xs text-muted-foreground">{monthLabel}</span>
-              </div>
-            );
-          })}
-        </div>
+              return (
+                <div key={month.month} className="flex flex-1 flex-col items-center gap-2">
+                  <span className={`text-xs font-medium ${isPositive ? 'text-profit' : 'text-loss'}`}>
+                    {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value}%` : '-'}
+                  </span>
+                  <div
+                    className={`w-full rounded-t transition-all hover:opacity-80 ${
+                      isPositive ? 'bg-profit' : 'bg-loss'
+                    }`}
+                    style={{ height: `${Math.max(height, 4)}%`, minHeight: '4px' }}
+                  />
+                  <span className="text-xs text-muted-foreground">{monthLabel}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile - Compact Grid */}
+          <div className="sm:hidden">
+            <div className="grid grid-cols-6 gap-1">
+              {filteredData.map((month) => {
+                const isPositive = month.value >= 0;
+                const monthKey = month.month.split('-')[1];
+                const monthLabel = months[monthKey] || monthKey;
+
+                return (
+                  <div
+                    key={month.month}
+                    className={`flex flex-col items-center justify-center py-1.5 px-0.5 rounded text-center ${getColorClass(month.value)}`}
+                  >
+                    <span className="text-[8px] uppercase opacity-60">{monthLabel}</span>
+                    <span className="text-[9px] font-semibold">
+                      {month.value !== 0 ? `${isPositive ? '+' : ''}${month.value.toFixed(0)}%` : '-'}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
       )}
 
-      {/* Legend */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-[10px] text-muted-foreground">
-        <div className="flex items-center gap-1">
-          <div className="h-2.5 w-2.5 rounded bg-green-500/80" />
+      {/* Legend - Compact */}
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[9px] text-muted-foreground">
+        <div className="flex items-center gap-0.5">
+          <div className="h-2 w-2 rounded-sm bg-green-500/80" />
           <span>&gt;5%</span>
         </div>
-        <div className="flex items-center gap-1">
-          <div className="h-2.5 w-2.5 rounded bg-green-500/50" />
+        <div className="flex items-center gap-0.5">
+          <div className="h-2 w-2 rounded-sm bg-green-500/50" />
           <span>2-5%</span>
         </div>
-        <div className="flex items-center gap-1">
-          <div className="h-2.5 w-2.5 rounded bg-green-500/20" />
+        <div className="flex items-center gap-0.5">
+          <div className="h-2 w-2 rounded-sm bg-green-500/20" />
           <span>0-2%</span>
         </div>
-        <div className="flex items-center gap-1">
-          <div className="h-2.5 w-2.5 rounded bg-red-500/20" />
-          <span>0 a -2%</span>
+        <div className="flex items-center gap-0.5">
+          <div className="h-2 w-2 rounded-sm bg-red-500/20" />
+          <span>-2 a 0</span>
         </div>
-        <div className="flex items-center gap-1">
-          <div className="h-2.5 w-2.5 rounded bg-red-500/50" />
-          <span>-2 a -5%</span>
+        <div className="flex items-center gap-0.5">
+          <div className="h-2 w-2 rounded-sm bg-red-500/50" />
+          <span>-5 a -2</span>
         </div>
-        <div className="flex items-center gap-1">
-          <div className="h-2.5 w-2.5 rounded bg-red-500/80" />
+        <div className="flex items-center gap-0.5">
+          <div className="h-2 w-2 rounded-sm bg-red-500/80" />
           <span>&lt;-5%</span>
         </div>
       </div>
