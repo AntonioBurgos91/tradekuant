@@ -127,21 +127,21 @@ export default function Home() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="mb-16 flex flex-col gap-4 sm:flex-row">
-            <Link href="/como-copiar">
+          <div className="mb-16 flex w-full max-w-md flex-col items-center justify-center gap-4 px-4 sm:w-auto sm:max-w-none sm:flex-row sm:px-0">
+            <Link href="/como-copiar" className="w-full sm:w-auto">
               <Button
                 size="lg"
-                className="h-12 gap-2 bg-primary px-8 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30"
+                className="h-12 w-full gap-2 bg-primary px-8 text-base font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
               >
                 {t.hero.ctaPrimary}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/dashboard">
+            <Link href="/dashboard" className="w-full sm:w-auto">
               <Button
                 size="lg"
                 variant="outline"
-                className="h-12 gap-2 border-border/50 px-8 text-base font-semibold hover:bg-secondary"
+                className="h-12 w-full gap-2 border-border/50 px-8 text-base font-semibold hover:bg-secondary sm:w-auto"
               >
                 {t.hero.ctaSecondary}
               </Button>
@@ -328,21 +328,21 @@ export default function Home() {
               {t.cta.description}
             </p>
 
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Link href="/como-copiar">
+            <div className="flex w-full max-w-md flex-col items-center justify-center gap-4 px-4 sm:w-auto sm:max-w-none sm:flex-row sm:px-0">
+              <Link href="/como-copiar" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="h-14 gap-2 bg-primary px-10 text-lg font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30"
+                  className="h-14 w-full gap-2 bg-primary px-10 text-lg font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 sm:w-auto"
                 >
                   {t.cta.button}
                   <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/dashboard">
+              <Link href="/dashboard" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="h-14 gap-2 border-border/50 px-10 text-lg font-semibold hover:bg-secondary"
+                  className="h-14 w-full gap-2 border-border/50 px-10 text-lg font-semibold hover:bg-secondary sm:w-auto"
                 >
                   {t.hero.ctaSecondary}
                 </Button>
