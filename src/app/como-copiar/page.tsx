@@ -1,8 +1,7 @@
 'use client';
 
 import { useLanguage } from '@/lib/i18n';
-import { ArrowRight, ExternalLink, DollarSign, UserPlus, Copy, HelpCircle, AlertTriangle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ExternalLink, DollarSign, HelpCircle } from 'lucide-react';
 
 // Bitget referral link
 const BITGET_REFERRAL_LINK = 'https://www.bitget.com/referral/register?from=referral&clacCode=NMURPAHH';
@@ -179,20 +178,6 @@ export default function ComocopiarPage() {
         </div>
       </section>
 
-      {/* Risk Disclaimer */}
-      <section className="border-t border-border/50">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex gap-4 p-6 rounded-lg border border-yellow-500/30 bg-yellow-500/10">
-            <AlertTriangle className="h-6 w-6 text-yellow-500 shrink-0 mt-0.5" />
-            <div>
-              <h3 className="font-semibold text-yellow-500 mb-2">{howToCopy.disclaimer.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {howToCopy.disclaimer.text}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
