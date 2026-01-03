@@ -7,7 +7,7 @@ import { NewsletterForm } from '@/components/common/NewsletterForm';
 
 // Social media links
 const socialLinks = [
-  { name: 'Twitter', href: 'https://twitter.com/tradekuant', icon: Twitter },
+  { name: 'Twitter', href: 'https://x.com/Tradekuant', icon: Twitter },
   { name: 'YouTube', href: 'https://youtube.com/@tradekuant', icon: Youtube },
   { name: 'Instagram', href: 'https://www.instagram.com/tradekuant', icon: Instagram },
   { name: 'Telegram', href: 'https://t.me/tradekuant', icon: Send },
