@@ -230,6 +230,7 @@ const es = {
     },
     minCapital: 'Capital mínimo recomendado',
     copyOn: 'Copiar en',
+    bitgetBonus: '🎁 Regístrate con nuestro enlace y obtén hasta $6,200 USDT en bonos',
     faq: {
       title: 'Preguntas Frecuentes',
       subtitle: 'Resolvemos las dudas más comunes sobre copy trading',
@@ -457,6 +458,7 @@ const en: typeof es = {
     },
     minCapital: 'Recommended minimum capital',
     copyOn: 'Copy on',
+    bitgetBonus: '🎁 Sign up with our link and get up to $6,200 USDT in bonuses',
     faq: {
       title: 'Frequently Asked Questions',
       subtitle: 'Answers to common questions about copy trading',
@@ -591,6 +593,7 @@ const de: typeof es = {
     },
     minCapital: 'Empfohlenes Mindestkapital',
     copyOn: 'Kopieren auf',
+    bitgetBonus: '🎁 Registriere dich über unseren Link und erhalte bis zu $6.200 USDT Bonus',
     faq: {
       title: 'Häufig gestellte Fragen',
       subtitle: 'Antworten auf häufige Fragen zum Copy Trading',
@@ -725,6 +728,7 @@ const zh: typeof es = {
     },
     minCapital: '建议最低资金',
     copyOn: '在此平台跟单',
+    bitgetBonus: '🎁 通过我们的链接注册，获得高达 $6,200 USDT 奖金',
     faq: {
       title: '常见问题',
       subtitle: '关于跟单交易的常见问题解答',
@@ -859,6 +863,7 @@ const fr: typeof es = {
     },
     minCapital: 'Capital minimum recommandé',
     copyOn: 'Copier sur',
+    bitgetBonus: '🎁 Inscrivez-vous via notre lien et obtenez jusqu\'à $6,200 USDT en bonus',
     faq: {
       title: 'Questions Fréquentes',
       subtitle: 'Réponses aux questions courantes sur le copy trading',
@@ -993,6 +998,7 @@ const ar: typeof es = {
     },
     minCapital: 'الحد الأدنى الموصى به لرأس المال',
     copyOn: 'انسخ على',
+    bitgetBonus: '🎁 سجل عبر رابطنا واحصل على مكافآت تصل إلى $6,200 USDT',
     faq: {
       title: 'الأسئلة الشائعة',
       subtitle: 'إجابات على الأسئلة الشائعة حول نسخ التداول',

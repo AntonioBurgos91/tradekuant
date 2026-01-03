@@ -4,6 +4,9 @@ import { useLanguage } from '@/lib/i18n';
 import { ArrowRight, ExternalLink, DollarSign, UserPlus, Copy, HelpCircle, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+// Bitget referral link
+const BITGET_REFERRAL_LINK = 'https://www.bitget.com/referral/register?from=referral&clacCode=NMURPAHH';
+
 const platforms = [
   {
     id: 'bitget',
@@ -11,14 +14,15 @@ const platforms = [
     color: '#00C896',
     minCapital: '$100 USD',
     type: 'Copy Trading Crypto',
-    link: 'https://www.bitget.com/copytrading/trader/PLACEHOLDER', // TODO: Reemplazar PLACEHOLDER con ID real
+    link: BITGET_REFERRAL_LINK,
+    hasBonus: true,
     steps: {
-      es: ['Crea tu cuenta en Bitget', 'Deposita mínimo $100 USD', 'Busca "TradeKuant" y activa el copy'],
-      en: ['Create your Bitget account', 'Deposit minimum $100 USD', 'Search "TradeKuant" and activate copy'],
-      de: ['Erstelle dein Bitget-Konto', 'Zahle mindestens $100 USD ein', 'Suche "TradeKuant" und aktiviere Copy'],
-      fr: ['Créez votre compte Bitget', 'Déposez minimum $100 USD', 'Recherchez "TradeKuant" et activez la copie'],
-      zh: ['创建您的Bitget账户', '存入至少$100美元', '搜索"TradeKuant"并激活跟单'],
-      ar: ['أنشئ حسابك في Bitget', 'أودع $100 دولار كحد أدنى', 'ابحث عن "TradeKuant" وفعّل النسخ'],
+      es: ['Regístrate en Bitget con nuestro enlace', 'Deposita mínimo $100 USD', 'Busca "TradeKuant" y activa el copy'],
+      en: ['Sign up on Bitget with our link', 'Deposit minimum $100 USD', 'Search "TradeKuant" and activate copy'],
+      de: ['Registriere dich bei Bitget über unseren Link', 'Zahle mindestens $100 USD ein', 'Suche "TradeKuant" und aktiviere Copy'],
+      fr: ['Inscrivez-vous sur Bitget via notre lien', 'Déposez minimum $100 USD', 'Recherchez "TradeKuant" et activez la copie'],
+      zh: ['通过我们的链接注册Bitget', '存入至少$100美元', '搜索"TradeKuant"并激活跟单'],
+      ar: ['سجل في Bitget عبر رابطنا', 'أودع $100 دولار كحد أدنى', 'ابحث عن "TradeKuant" وفعّل النسخ'],
     },
   },
   {
@@ -103,6 +107,15 @@ export default function ComocopiarPage() {
                   <p className="text-sm text-muted-foreground">{platform.type}</p>
                 </div>
               </div>
+
+              {/* Bonus Badge for Bitget */}
+              {'hasBonus' in platform && platform.hasBonus && (
+                <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                  <p className="text-sm text-emerald-400 font-medium">
+                    {howToCopy.bitgetBonus || '🎁 Regístrate con nuestro enlace y obtén hasta $6,200 USDT en bonos'}
+                  </p>
+                </div>
+              )}
 
               {/* Min Capital */}
               <div className="flex items-center gap-2 mb-6 p-3 rounded-lg bg-secondary/50">

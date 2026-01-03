@@ -12,9 +12,9 @@ const socialLinks = [
   { name: 'Telegram', href: 'https://t.me/tradekuant', icon: Send },
 ];
 
-// Links to copy trading profiles (replace PLACEHOLDER with real IDs)
+// Links to copy trading profiles
 const platformCopyLinks = [
-  { name: 'Bitget Copy Trading', href: 'https://www.bitget.com/copytrading/trader/PLACEHOLDER', color: '#00C896' },
+  { name: 'Bitget Copy Trading', href: 'https://www.bitget.com/referral/register?from=referral&clacCode=NMURPAHH', color: '#00C896' },
   { name: 'Darwinex DARWIN', href: 'https://www.darwinex.com/darwin/PLACEHOLDER', color: '#3B82F6' },
   { name: 'eToro Portfolio', href: 'https://www.etoro.com/people/PLACEHOLDER', color: '#69C53E' },
 ];
