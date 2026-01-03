@@ -140,10 +140,10 @@ export function Footer() {
               {t.contact.subtitle}
             </p>
             <a
-              href="mailto:contact@tradekuant.com"
+              href="mailto:tradekuant@proton.me"
               className="text-sm text-primary hover:underline"
             >
-              contact@tradekuant.com
+              tradekuant@proton.me
             </a>
           </div>
         </div>

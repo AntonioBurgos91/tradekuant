@@ -37,10 +37,10 @@ export default function ContactoPage() {
               {t.contact.subtitle}
             </p>
             <a
-              href="mailto:contact@tradekuant.com"
+              href="mailto:tradekuant@proton.me"
               className="text-lg font-medium text-primary hover:underline"
             >
-              contact@tradekuant.com
+              tradekuant@proton.me
             </a>
           </div>
 
