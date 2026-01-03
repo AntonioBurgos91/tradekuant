@@ -10,7 +10,7 @@ const socialLinks = [
   { name: 'Twitter', href: 'https://x.com/Tradekuant', icon: Twitter },
   { name: 'YouTube', href: 'https://youtube.com/@tradekuant', icon: Youtube },
   { name: 'Instagram', href: 'https://www.instagram.com/tradekuant', icon: Instagram },
-  { name: 'Telegram', href: 'https://t.me/tradekuant', icon: Send },
+  { name: 'Telegram', href: 'https://t.me/+vBxcwErBqJ5hMGNk', icon: Send },
 ];
 
 // Links to copy trading profiles
