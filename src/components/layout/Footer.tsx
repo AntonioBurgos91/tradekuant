@@ -184,7 +184,7 @@ export function Footer() {
         {/* Risk disclaimer */}
         <div className="border-t border-border/50 py-4">
           <p className="text-center text-[10px] leading-relaxed text-muted-foreground/60">
-            <strong>{t.howToCopy.disclaimer.title}:</strong> {t.footer.riskWarning}
+            {t.footer.riskWarning}
           </p>
         </div>
       </div>
